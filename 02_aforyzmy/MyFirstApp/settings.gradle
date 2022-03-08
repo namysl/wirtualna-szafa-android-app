@@ -13,4 +13,4 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "My First App"
-include ':aforyzmy'
+include ':app'
