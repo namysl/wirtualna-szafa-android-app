@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tab_aforyzmy">
+        <item>@string/cytat1</item>
+        <item>@string/cytat2</item>
+        <item>@string/cytat3</item>
+        <item>@string/cytat4</item>
+        <item>@string/cytat5</item>
+        <item>@string/cytat6</item>
+        <item>@string/cytat7</item>
+        <item>@string/cytat8</item>
+        <item>@string/cytat9</item>
+        <item>@string/cytat10</item>
+        <item>@string/cytat11</item>
+        <item>@string/cytat12</item>
+    </string-array>
+</resources>

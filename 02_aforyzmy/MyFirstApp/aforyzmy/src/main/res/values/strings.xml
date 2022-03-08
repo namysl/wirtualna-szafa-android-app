@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <string name="app_name">ćwiczenie 1 - aforyzmy</string>
+
+    <string name="button">Aforyzm dnia</string>
+
+    <string name="cytat1">Ognia nie gasi się ogniem.</string>
+    <string name="cytat2">Amicus certus in re incerta cernitur.</string>
+    <string name="cytat3">Człowiekiem jestem i nic, co ludzkie, nie jest mi obce.</string>
+    <string name="cytat4">Bad art is more tragically beautiful than good art, because it documents human failure.</string>
+    <string name="cytat5">If Hell is other people, thought Shadow, then Purgatory is airports.</string>
+    <string name="cytat6">If you don\'t know anything about computers, just remember that they are machines that do exactly what you tell them but often surprise you in the result.</string>
+    <string name="cytat7">The only legitimate use of a computer is to play games.</string>
+    <string name="cytat8">Zawsze potrzebujesz dwa razy więcej RAM.\n - cytat przypisywany twórcom Android Studio.</string>
+    <string name="cytat9">The greatest failure is not to try.</string>
+    <string name="cytat10">To err is human, but being right is nice too.</string>
+    <string name="cytat11">Lex retro not agit.</string>
+    <string name="cytat12">If you want to change the way people respond to you, change the way you respond to people.</string>
+</resources>
