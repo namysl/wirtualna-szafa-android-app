@@ -10,6 +10,7 @@
         android:id="@+id/textView"
         android:layout_width="338dp"
         android:layout_height="38dp"
+        android:shadowColor="#673AB7"
         android:textAlignment="textEnd"
         android:textColor="#000000"
         android:textSize="34sp"
@@ -184,5 +185,18 @@
         android:text="@string/dzielenie"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_mnozenie" />
+
+    <Button
+        android:id="@+id/button_kropka"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="16dp"
+        android:onClick="kropka"
+        android:text="@string/przecinek"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/button_plus"
+        app:layout_constraintTop_toBottomOf="@+id/button_rowna_sie" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

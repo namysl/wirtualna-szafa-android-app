@@ -6,8 +6,10 @@ import android.view.View;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    CharSequence liczba1_cs;
+    String liczba1_cs;
     String operacja;
+    boolean jest_kropka = false;
+
     private TextView obj;
 
     @Override
@@ -17,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         obj = findViewById(R.id.textView);
     }
-
+/*
     public void aktualizuj_pole(String new_text) {
         if (new_text.equals("")) {
             obj.setText(new_text);
@@ -43,6 +45,50 @@ public class MainActivity extends AppCompatActivity {
             }
             else{
                 obj.setText(text);
+            }
+        }
+    }
+*/
+
+    public void aktualizuj_pole(String new_text){
+        CharSequence old_text;
+        String text;
+        System.out.println(jest_kropka);
+        if (new_text.equals("")){
+            //czyszczenie ekranu (C)
+            obj.setText(new_text);
+        }
+        else if(new_text.equals(".")){
+            if(!jest_kropka){
+                jest_kropka = true;
+                old_text = obj.getText();
+                text = old_text + ".";
+                obj.setText(text);
+            }
+        }
+        else{
+            //operacje i cyfry
+            if (new_text.equals("+") || new_text.equals("-") || new_text.equals("*") || new_text.equals("/")){
+                //operacje
+
+                liczba1_cs = obj.getText().toString(); //zapisz liczbe
+                operacja = new_text; //zapisz operacje
+                obj.setText(new_text); //operacja na ekran
+            }
+            else{
+                //cyfry
+                old_text = obj.getText();
+                String old_text_s = old_text.toString();
+
+                if(old_text_s.equals("+") || old_text_s.equals("-") || old_text_s.equals("*") || old_text_s.equals("/")){
+                    //jesli poprzednio byla operacja
+                    obj.setText(new_text);
+                }
+                else {
+                    //poprzednio byly cyfry
+                    text = old_text + new_text;
+                    obj.setText(text);
+                }
             }
         }
     }
@@ -88,56 +134,57 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void znak_plus(View view){
-        liczba1_cs = obj.getText();
         aktualizuj_pole("+");
-        operacja = "+";
     }
 
     public void znak_minus(View view){
-        liczba1_cs = obj.getText();
         aktualizuj_pole("-");
-        operacja = "-";
     }
 
     public void znak_mnozenie(View view){
-        liczba1_cs = obj.getText();
         aktualizuj_pole("*");
-        operacja = "*";
     }
 
     public void znak_dzielenie(View view){
-        liczba1_cs = obj.getText();
         aktualizuj_pole("/");
-        operacja = "/";
     }
 
     public void usun(View view){
         aktualizuj_pole("");
+        jest_kropka = false;
+    }
+
+    public void kropka(View view){
+        aktualizuj_pole(".");
     }
 
     public void rowna_sie(View view){
         double wynik = 0;
+        try {
+            double liczba1 = Double.parseDouble(liczba1_cs);
+            double liczba2 = Double.parseDouble(obj.getText().toString());
 
-        double liczba1 = Integer.parseInt(liczba1_cs.toString());
-        double liczba2 = 4;
+            switch (operacja) {
+                case "+":
+                    wynik = liczba1 + liczba2;
+                    break;
+                case "-":
+                    wynik = liczba1 - liczba2;
+                    break;
+                case "*":
+                    wynik = liczba1 * liczba2;
+                    break;
+                case "/":
+                    wynik = liczba1 / liczba2;
+                    break;
+            }
+            obj.setText(String.valueOf(wynik));
 
-        switch (operacja) {
-            case "+":
-                wynik = liczba1 + liczba2;
-                break;
-            case "-":
-                wynik = liczba1 - liczba2;
-                break;
-            case "*":
-                wynik = liczba1 * liczba2;
-                break;
-            case "/":
-                wynik = liczba1 / liczba2;
-                break;
+        }catch(Exception e){
+            e.printStackTrace();
         }
-        obj.setText(String.valueOf(wynik));
-
     }
+
     /*
     public void dodaj(View view){
         TextView obj = (TextView)findViewById(R.id.textView);
