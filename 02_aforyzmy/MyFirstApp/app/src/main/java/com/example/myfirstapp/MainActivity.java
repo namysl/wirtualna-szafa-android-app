@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
         String[] tab = getResources().getStringArray(R.array.tab_aforyzmy);
         int i = gen.nextInt(tab.length);
 
-        final TextView TextView = findViewById(R.id.textView1);
+        final TextView tv1 = findViewById(R.id.textView1);
 
         String message = tab[i];
-        TextView.setText(message);
+        tv1.setText(message);
 
     }
 }
