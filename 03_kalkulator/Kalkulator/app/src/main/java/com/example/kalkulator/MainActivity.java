@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             //operacje i cyfry
             if (new_text.equals("+") || new_text.equals("-") || new_text.equals("*") || new_text.equals("/") ||
-            new_text.equals("^") || new_text.equals("√") || new_text.equals("log") || new_text.equals("!")){
+                new_text.equals("^") || new_text.equals("√") || new_text.equals("log") || new_text.equals("!") || new_text.equals("%")){
                 //operacje
                 liczba1_cs = obj.getText().toString(); //zapisz liczbe
                 operacja = new_text; //zapisz operacje
@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
                 String old_text_s = old_text.toString();
 
                 if(old_text_s.equals("+") || old_text_s.equals("-") || old_text_s.equals("*") || old_text_s.equals("/") ||
-                old_text_s.equals("^") || old_text_s.equals("√") || old_text_s.equals("log") || old_text_s.equals("!")){
+                old_text_s.equals("^") || old_text_s.equals("√") || old_text_s.equals("log") || old_text_s.equals("!") || old_text_s.equals("%")){
                     //jesli poprzednia byla operacja
                     obj.setText(new_text);
                 }
@@ -146,12 +146,17 @@ public class MainActivity extends AppCompatActivity {
         aktualizuj_pole("log");
     }
 
+    public void procent(View view){
+        aktualizuj_pole("%");
+    }
+
     public void rowna_sie(View view){
         double wynik = 0;
         try {
             double liczba1 = Double.parseDouble(liczba1_cs);
 
-            if (operacja.equals("+") || operacja.equals("-") || operacja.equals("*") || operacja.equals("/") || operacja.equals("^")) {
+            if (operacja.equals("+") || operacja.equals("-") || operacja.equals("*") ||
+                operacja.equals("/") || operacja.equals("^") || operacja.equals("%")) {
                 double liczba2 = Double.parseDouble(obj.getText().toString());
 
                 switch (operacja) {

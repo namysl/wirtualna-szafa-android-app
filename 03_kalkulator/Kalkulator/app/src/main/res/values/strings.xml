@@ -19,6 +19,7 @@
     <string name="dzielenie">/</string>
     <string name="potega">^</string>
     <string name="pierwiastek">√</string>
+    <string name="procent">%</string>
     <string name="silnia">!</string>
     <string name="logarytm">log10</string>
     <string name="sin">sin</string>
