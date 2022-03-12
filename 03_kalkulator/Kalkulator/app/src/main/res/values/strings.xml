@@ -10,7 +10,8 @@
     <string name="cyfra7">7</string>
     <string name="cyfra8">8</string>
     <string name="cyfra9">9</string>
-    <string name="usun">DEL</string>
+    <string name="usun">C</string>
+    <string name="rowna_sie">=</string>
     <string name="dodawanie">+</string>
     <string name="odejmowanie">-</string>
     <string name="mnozenie">*</string>

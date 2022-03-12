@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
+    double x;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +16,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void nie_wiem(){
-
         TextView obj = (TextView)findViewById(R.id.textView);
         CharSequence cs = obj.getText();
         String s = cs.toString();
@@ -27,14 +27,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void cyfra1(View view){
         TextView obj = (TextView)findViewById(R.id.textView);
-        
-        String text = "1";
+        CharSequence old_text = obj.getText();
+        String text = old_text + "1";
         obj.setText(text);
     }
 
+    public void rowna_sie(View view){
+
+    }
+
     public void usun(View view){
-        String text = "";
         TextView obj = (TextView)findViewById(R.id.textView);
+
+        String text = "";
+        obj.setText(text);
+    }
+
+    public void dodaj(View view){
+        TextView obj = (TextView)findViewById(R.id.textView);
+
+        CharSequence old_text = obj.getText();
+        String text = old_text + "+";
+
+        CharSequence cs = obj.getText();
+        String s = cs.toString();
+        x = Double.parseDouble(s);
+
         obj.setText(text);
     }
 
