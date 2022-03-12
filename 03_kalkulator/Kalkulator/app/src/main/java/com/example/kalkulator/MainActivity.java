@@ -19,41 +19,11 @@ public class MainActivity extends AppCompatActivity {
 
         obj = findViewById(R.id.textView);
     }
-/*
-    public void aktualizuj_pole(String new_text) {
-        if (new_text.equals("")) {
-            obj.setText(new_text);
-        }
-        else {
-            CharSequence old_text = obj.getText();
-            String old_text_s = old_text.toString();
-
-            String text = old_text + new_text;
-
-            if (old_text_s.length() != 0) {
-                String last_character = old_text_s.substring(old_text_s.length() - 1);
-                System.out.println(last_character);
-                if (last_character.equals("+") ||
-                    last_character.equals("-") ||
-                    last_character.equals("*") ||
-                    last_character.equals("/")) {
-                    obj.setText(last_character);
-                }
-                else {
-                    obj.setText(text);
-                }
-            }
-            else{
-                obj.setText(text);
-            }
-        }
-    }
-*/
 
     public void aktualizuj_pole(String new_text){
         CharSequence old_text;
         String text;
-        System.out.println(jest_kropka);
+
         if (new_text.equals("")){
             //czyszczenie ekranu (C)
             obj.setText(new_text);
@@ -68,24 +38,26 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             //operacje i cyfry
-            if (new_text.equals("+") || new_text.equals("-") || new_text.equals("*") || new_text.equals("/")){
+            if (new_text.equals("+") || new_text.equals("-") || new_text.equals("*") || new_text.equals("/") ||
+            new_text.equals("^") || new_text.equals("√") || new_text.equals("log") || new_text.equals("!")){
                 //operacje
-
                 liczba1_cs = obj.getText().toString(); //zapisz liczbe
                 operacja = new_text; //zapisz operacje
-                obj.setText(new_text); //operacja na ekran
+                obj.setText(new_text); //wyswietl operacje
+                jest_kropka = false;
             }
             else{
                 //cyfry
                 old_text = obj.getText();
                 String old_text_s = old_text.toString();
 
-                if(old_text_s.equals("+") || old_text_s.equals("-") || old_text_s.equals("*") || old_text_s.equals("/")){
-                    //jesli poprzednio byla operacja
+                if(old_text_s.equals("+") || old_text_s.equals("-") || old_text_s.equals("*") || old_text_s.equals("/") ||
+                old_text_s.equals("^") || old_text_s.equals("√") || old_text_s.equals("log") || old_text_s.equals("!")){
+                    //jesli poprzednia byla operacja
                     obj.setText(new_text);
                 }
                 else {
-                    //poprzednio byly cyfry
+                    //poprzednia byla cyfra
                     text = old_text + new_text;
                     obj.setText(text);
                 }
@@ -149,55 +121,79 @@ public class MainActivity extends AppCompatActivity {
         aktualizuj_pole("/");
     }
 
+    public void kropka(View view){
+        aktualizuj_pole(".");
+    }
+
     public void usun(View view){
         aktualizuj_pole("");
         jest_kropka = false;
     }
 
-    public void kropka(View view){
-        aktualizuj_pole(".");
+    public void potegowanie(View view){
+        aktualizuj_pole("^");
+    }
+
+    public void pierwiastkowanie(View view){
+        aktualizuj_pole("√");
+    }
+
+    public void silnia(View view){
+        aktualizuj_pole("!");
+    }
+
+    public void logarytm(View view){
+        aktualizuj_pole("log");
     }
 
     public void rowna_sie(View view){
         double wynik = 0;
         try {
             double liczba1 = Double.parseDouble(liczba1_cs);
-            double liczba2 = Double.parseDouble(obj.getText().toString());
 
-            switch (operacja) {
-                case "+":
-                    wynik = liczba1 + liczba2;
-                    break;
-                case "-":
-                    wynik = liczba1 - liczba2;
-                    break;
-                case "*":
-                    wynik = liczba1 * liczba2;
-                    break;
-                case "/":
-                    wynik = liczba1 / liczba2;
-                    break;
+            if (operacja.equals("+") || operacja.equals("-") || operacja.equals("*") || operacja.equals("/") || operacja.equals("^")) {
+                double liczba2 = Double.parseDouble(obj.getText().toString());
+
+                switch (operacja) {
+                    case "+":
+                        wynik = liczba1 + liczba2;
+                        break;
+                    case "-":
+                        wynik = liczba1 - liczba2;
+                        break;
+                    case "*":
+                        wynik = liczba1 * liczba2;
+                        break;
+                    case "/":
+                        wynik = liczba1 / liczba2;
+                        break;
+                    case "^":
+                        wynik = Math.pow(liczba1, liczba2);
+                        break;
+                }
             }
+            else {
+                switch (operacja) {
+                    case "√":
+                        wynik = Math.sqrt(liczba1);
+                        break;
+                    case "!":
+                        int silnia = 1;
+                        for (int i = 1; i <= liczba1; i++) {
+                            silnia = silnia * i;
+                        }
+                        wynik = silnia;
+                        break;
+                    case "log":
+                        wynik = Math.log10(liczba1);
+                        break;
+                }
+            }
+
             obj.setText(String.valueOf(wynik));
 
         }catch(Exception e){
             e.printStackTrace();
         }
     }
-
-    /*
-    public void dodaj(View view){
-        TextView obj = (TextView)findViewById(R.id.textView);
-
-        CharSequence old_text = obj.getText();
-        String text = old_text + "+";
-
-        CharSequence cs = obj.getText();
-        String s = cs.toString();
-        x = Double.parseDouble(s);
-
-        System.out.println(x);
-        obj.setText(text);
-    }
-    */
 }

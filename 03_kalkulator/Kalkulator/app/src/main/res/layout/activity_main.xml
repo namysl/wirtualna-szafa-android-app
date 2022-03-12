@@ -8,9 +8,11 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="338dp"
-        android:layout_height="38dp"
-        android:shadowColor="#673AB7"
+        android:layout_width="339dp"
+        android:layout_height="57dp"
+        android:background="#AEED64"
+        android:lineSpacingExtra="1sp"
+        android:shadowColor="@color/black"
         android:textAlignment="textEnd"
         android:textColor="#000000"
         android:textSize="34sp"
@@ -89,6 +91,7 @@
         android:layout_height="wrap_content"
         android:onClick="cyfra7"
         android:text="@string/cyfra7"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toStartOf="@+id/button8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
@@ -198,5 +201,46 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/button_plus"
         app:layout_constraintTop_toBottomOf="@+id/button_rowna_sie" />
+
+    <Button
+        android:id="@+id/button_potegowanie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:onClick="potegowanie"
+        android:text="@string/potega"
+        app:layout_constraintEnd_toStartOf="@+id/button_kropka"
+        app:layout_constraintStart_toEndOf="@+id/button_plus"
+        app:layout_constraintTop_toBottomOf="@+id/button0" />
+
+    <Button
+        android:id="@+id/button_pierwiastkowanie"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:onClick="pierwiastkowanie"
+        android:text="@string/pierwiastek"
+        app:layout_constraintStart_toEndOf="@+id/button_minus"
+        app:layout_constraintTop_toBottomOf="@+id/button_potegowanie" />
+
+    <Button
+        android:id="@+id/button_silnia"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:onClick="silnia"
+        android:text="@string/silnia"
+        app:layout_constraintStart_toEndOf="@+id/button_mnozenie"
+        app:layout_constraintTop_toBottomOf="@+id/button_pierwiastkowanie" />
+
+    <Button
+        android:id="@+id/button_logarytm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="36dp"
+        android:onClick="logarytm"
+        android:text="@string/logarytm"
+        app:layout_constraintStart_toEndOf="@+id/button_dzielenie"
+        app:layout_constraintTop_toBottomOf="@+id/button_silnia" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
