@@ -37,4 +37,5 @@
     <string name="pamiec_pokaz">M</string>
     <string name="pamiec_dodaj">M+</string>
     <string name="pamiec_usun">M-</string>
+
 </resources>

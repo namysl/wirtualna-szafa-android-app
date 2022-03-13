@@ -194,10 +194,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void znak_mem_minus(View view){
+        //usuwa zapisana liczbe z pamieci
         pamiec = "";
     }
 
     public void znak_mem(View view){
+        //umieszcza liczbe z pamieci w polu tekstowym
         obj.setText(pamiec);
     }
 
@@ -280,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
             obj.setText(String.valueOf(wynik)); //wyswietl wynik
-
         }catch(Exception e){
             e.printStackTrace();
         }
