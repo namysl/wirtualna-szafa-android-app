@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import static java.lang.Math.*;
 
 public class MainActivity extends AppCompatActivity {
-    String liczba1_cs;
+    String liczba1_s;
     String operacja;
-    boolean jest_kropka = false;
+    String pamiec;
+    boolean jest_przecinek = false;
 
     private TextView obj;
 
@@ -20,7 +22,18 @@ public class MainActivity extends AppCompatActivity {
         obj = findViewById(R.id.textView);
     }
 
+    public static boolean isNumeric(String str) {
+        //sprawdza czy podany string jest liczba
+        try {
+            Double.parseDouble(str);
+            return true;
+        } catch(NumberFormatException e){
+            return false;
+        }
+    }
+
     public void aktualizuj_pole(String new_text){
+        //aktualizuje pole tekstowe kalkulatora
         CharSequence old_text;
         String text;
 
@@ -29,36 +42,42 @@ public class MainActivity extends AppCompatActivity {
             obj.setText(new_text);
         }
         else if(new_text.equals(".")){
-            if(!jest_kropka){
-                jest_kropka = true;
+            //przecinek
+            if(!jest_przecinek){
                 old_text = obj.getText();
-                text = old_text + ".";
+
+                if(old_text.equals("")){
+                    old_text = "0";  //najpierw wprowadzono kropke, dodaj zero przed przecinkiem
+                }
+                jest_przecinek = true;
+
+                text = old_text + "."; //zaktualizuj o kropke
                 obj.setText(text);
             }
         }
         else{
-            //operacje i cyfry
-            if (new_text.equals("+") || new_text.equals("-") || new_text.equals("*") || new_text.equals("/") ||
-                new_text.equals("^") || new_text.equals("√") || new_text.equals("log") || new_text.equals("!") || new_text.equals("%")){
-                //operacje
-                liczba1_cs = obj.getText().toString(); //zapisz liczbe
+            //wprowadzono operacje lub cyfre
+
+            if(!isNumeric(new_text)){
+                //wprowadzono operacje
+                liczba1_s = obj.getText().toString(); //zapisz liczbe
                 operacja = new_text; //zapisz operacje
                 obj.setText(new_text); //wyswietl operacje
-                jest_kropka = false;
+                jest_przecinek = false; //zresetuj przecinek
             }
             else{
-                //cyfry
+                //wprowadzono cyfre
                 old_text = obj.getText();
                 String old_text_s = old_text.toString();
 
-                if(old_text_s.equals("+") || old_text_s.equals("-") || old_text_s.equals("*") || old_text_s.equals("/") ||
-                old_text_s.equals("^") || old_text_s.equals("√") || old_text_s.equals("log") || old_text_s.equals("!") || old_text_s.equals("%")){
-                    //jesli poprzednia byla operacja
-                    obj.setText(new_text);
+                if(!isNumeric(old_text_s)){
+                    //poprzednia byla operacja
+                    obj.setText(new_text); //wyswietl nowa cyfre
                 }
+
                 else {
                     //poprzednia byla cyfra
-                    text = old_text + new_text;
+                    text = old_text + new_text; //dopisz wprowadzona cyfre
                     obj.setText(text);
                 }
             }
@@ -105,11 +124,11 @@ public class MainActivity extends AppCompatActivity {
         aktualizuj_pole("9");
     }
 
-    public void znak_plus(View view){
+    public void znak_dodawanie(View view){
         aktualizuj_pole("+");
     }
 
-    public void znak_minus(View view){
+    public void znak_odejmowanie(View view){
         aktualizuj_pole("-");
     }
 
@@ -121,42 +140,84 @@ public class MainActivity extends AppCompatActivity {
         aktualizuj_pole("/");
     }
 
-    public void kropka(View view){
+    public void przecinek(View view){
         aktualizuj_pole(".");
+    }
+
+    public void znak_potega(View view){
+        aktualizuj_pole("^");
+    }
+
+    public void znak_pierwiastek(View view){
+        aktualizuj_pole("√");
+    }
+
+    public void znak_silnia(View view){
+        aktualizuj_pole("!");
+    }
+
+    public void znak_logarytm(View view){
+        aktualizuj_pole("log");
+    }
+
+    public void znak_procent(View view){
+        aktualizuj_pole("%");
+    }
+
+    public void znak_sin(View view){
+        aktualizuj_pole("sin");
+    }
+
+    public void znak_cos(View view){
+        aktualizuj_pole("cos");
+    }
+
+    public void znak_tg(View view){
+        aktualizuj_pole("tg");
+    }
+
+    public void znak_ctg(View view){
+        aktualizuj_pole("ctg");
+    }
+
+    public void znak_sec(View view){
+        aktualizuj_pole("sec");
+    }
+
+    public void znak_cosec(View view){
+        aktualizuj_pole("cosec");
+    }
+
+    public void znak_mem_plus(View view){
+        //dodaje wartosc z ekranu do pamieci
+        pamiec = obj.getText().toString();
+    }
+
+    public void znak_mem_minus(View view){
+        pamiec = "";
+    }
+
+    public void znak_mem(View view){
+        obj.setText(pamiec);
     }
 
     public void usun(View view){
         aktualizuj_pole("");
-        jest_kropka = false;
-    }
-
-    public void potegowanie(View view){
-        aktualizuj_pole("^");
-    }
-
-    public void pierwiastkowanie(View view){
-        aktualizuj_pole("√");
-    }
-
-    public void silnia(View view){
-        aktualizuj_pole("!");
-    }
-
-    public void logarytm(View view){
-        aktualizuj_pole("log");
-    }
-
-    public void procent(View view){
-        aktualizuj_pole("%");
+        jest_przecinek = false;
     }
 
     public void rowna_sie(View view){
+        //wykonuje dzialania
         double wynik = 0;
+
         try {
-            double liczba1 = Double.parseDouble(liczba1_cs);
+            double liczba1 = Double.parseDouble(liczba1_s);
 
             if (operacja.equals("+") || operacja.equals("-") || operacja.equals("*") ||
                 operacja.equals("/") || operacja.equals("^") || operacja.equals("%")) {
+                //operacje dwuliczbowe -> [liczba1] [operacja] [liczba2] =
+
+                //liczba wprowadzona po operacji:
                 double liczba2 = Double.parseDouble(obj.getText().toString());
 
                 switch (operacja) {
@@ -173,14 +234,19 @@ public class MainActivity extends AppCompatActivity {
                         wynik = liczba1 / liczba2;
                         break;
                     case "^":
-                        wynik = Math.pow(liczba1, liczba2);
+                        wynik = pow(liczba1, liczba2);
+                        break;
+                    case "%":
+                        //[liczba1] % z [liczba2]
+                        wynik = (liczba1/100) * liczba2;
                         break;
                 }
             }
             else {
+                //operacje jednoliczbowe -> [liczba1] [operacja] =
                 switch (operacja) {
                     case "√":
-                        wynik = Math.sqrt(liczba1);
+                        wynik = sqrt(liczba1);
                         break;
                     case "!":
                         int silnia = 1;
@@ -190,12 +256,30 @@ public class MainActivity extends AppCompatActivity {
                         wynik = silnia;
                         break;
                     case "log":
-                        wynik = Math.log10(liczba1);
+                        wynik = log10(liczba1);
+                        break;
+                    //funkcje trygonometryczne: liczba1 w radianach
+                    case "sin":
+                        wynik = sin(liczba1);
+                        break;
+                    case "cos":
+                        wynik = cos(liczba1);
+                        break;
+                    case "tg":
+                        wynik = tan(liczba1);
+                        break;
+                    case "ctg":
+                        wynik = 1 / tan(liczba1);
+                        break;
+                    case "sec":
+                        wynik = 1 / cos(liczba1);
+                        break;
+                    case "cosec":
+                        wynik = 1 / sin(liczba1);
                         break;
                 }
             }
-
-            obj.setText(String.valueOf(wynik));
+            obj.setText(String.valueOf(wynik)); //wyswietl wynik
 
         }catch(Exception e){
             e.printStackTrace();

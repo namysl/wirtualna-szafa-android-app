@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Kalkulator</string>
+
     <string name="cyfra0">0</string>
     <string name="cyfra1">1</string>
     <string name="cyfra2">2</string>
@@ -10,22 +11,29 @@
     <string name="cyfra7">7</string>
     <string name="cyfra8">8</string>
     <string name="cyfra9">9</string>
+
     <string name="przecinek">.</string>
     <string name="usun">C</string>
     <string name="rowna_sie">=</string>
+
     <string name="dodawanie">+</string>
     <string name="odejmowanie">-</string>
     <string name="mnozenie">*</string>
     <string name="dzielenie">/</string>
+
     <string name="potega">^</string>
     <string name="pierwiastek">√</string>
     <string name="procent">%</string>
     <string name="silnia">!</string>
     <string name="logarytm">log10</string>
+
     <string name="sin">sin</string>
     <string name="cos">cos</string>
     <string name="tg">tg</string>
     <string name="ctg">ctg</string>
+    <string name="sec">sec</string>
+    <string name="cosec">cosec</string>
+
     <string name="pamiec_pokaz">M</string>
     <string name="pamiec_dodaj">M+</string>
     <string name="pamiec_usun">M-</string>
