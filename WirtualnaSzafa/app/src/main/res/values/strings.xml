@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Wirtualna Szafa</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Wirtualna Szafa</string>
+    <string name="nav_header_subtitle">whatever</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Opcje</string>
+
+    <string name="menu_home">Strona główna</string>
+    <string name="menu_gallery">Galeria</string>
+    <string name="menu_slideshow">Dodaj element</string>
+    <string name="menu_delete">Usuń element</string>
+    <string name="menu_collection">Zestawy</string>
+</resources>
