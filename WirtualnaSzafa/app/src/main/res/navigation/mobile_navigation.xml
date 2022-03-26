@@ -10,16 +10,31 @@
         android:name="com.example.wirtualnaszafa.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
-
     <fragment
         android:id="@+id/nav_gallery"
         android:name="com.example.wirtualnaszafa.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
-
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.wirtualnaszafa.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/add_element"
+        android:name="com.example.wirtualnaszafa.ui.add_element.AddElementFragment"
+        android:label="fragment_add_element"
+        tools:layout="@layout/fragment_add_element" />
+    <fragment
+        android:id="@+id/remove_element"
+        android:name="com.example.wirtualnaszafa.ui.remove_element.RemoveElementFragment"
+        android:label="fragment_remove_element"
+        tools:layout="@layout/fragment_remove_element" />
+    <fragment
+        android:id="@+id/randomize"
+        android:name="com.example.wirtualnaszafa.ui.randomize.RandomizeFragment"
+        android:label="fragment_randomize"
+        tools:layout="@layout/fragment_randomize" />
+    <fragment
+        android:id="@+id/collections"
+        android:name="com.example.wirtualnaszafa.ui.collections.CollectionsFragment"
+        android:label="fragment_collections"
+        tools:layout="@layout/fragment_collections" />
+
+
 </navigation>

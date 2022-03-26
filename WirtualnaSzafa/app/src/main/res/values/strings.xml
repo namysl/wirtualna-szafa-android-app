@@ -3,13 +3,16 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Wirtualna Szafa</string>
-    <string name="nav_header_subtitle">whatever</string>
+    <string name="nav_header_subtitle">v0.1</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Opcje</string>
 
     <string name="menu_home">Strona główna</string>
     <string name="menu_gallery">Galeria</string>
-    <string name="menu_slideshow">Dodaj element</string>
-    <string name="menu_delete">Usuń element</string>
-    <string name="menu_collection">Zestawy</string>
+    <string name="menu_add_element">Dodaj element</string>
+    <string name="menu_remove_element">Usuń element</string>
+    <string name="menu_randomize">Przeglądaj losowe zestawy</string>
+    <string name="menu_collection">Przeglądaj zapisane zestawy</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
