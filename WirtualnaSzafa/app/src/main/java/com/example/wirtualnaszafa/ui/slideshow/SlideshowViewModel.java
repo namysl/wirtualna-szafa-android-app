@@ -10,7 +10,7 @@ public class SlideshowViewModel extends ViewModel {
 
     public SlideshowViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Jestem w java/costam/ui/slideshow/SlideshowViewModel");
+        mText.setValue("SlideshowViewModel");
     }
 
     public LiveData<String> getText() {

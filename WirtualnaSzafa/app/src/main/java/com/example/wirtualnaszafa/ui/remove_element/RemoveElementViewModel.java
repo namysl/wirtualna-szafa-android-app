@@ -10,7 +10,7 @@ public class RemoveElementViewModel extends ViewModel {
 
     public RemoveElementViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Hello RemoveElement!");
+        mText.setValue("Jesteś w RemoveElement");
     }
 
     public LiveData<String> getText() {

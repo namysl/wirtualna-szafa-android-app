@@ -10,7 +10,7 @@ public class GalleryViewModel extends ViewModel {
 
     public GalleryViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Jestem w java/costam/ui/slideshow/GalleryViewModel");
+        mText.setValue("Jesteś w Gallery");
     }
 
     public LiveData<String> getText() {

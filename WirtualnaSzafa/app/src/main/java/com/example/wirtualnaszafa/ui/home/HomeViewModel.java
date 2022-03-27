@@ -10,7 +10,7 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Jestem w java/costam/ui/slideshow/HomeViewModel");
+        mText.setValue("Jesteś w Home");
     }
 
     public LiveData<String> getText() {
