@@ -18,22 +18,22 @@
     <fragment
         android:id="@+id/nav_add_element"
         android:name="com.example.wirtualnaszafa.ui.add_element.AddElementFragment"
-        android:label="fragment_add_element"
+        android:label="@string/menu_add_element"
         tools:layout="@layout/fragment_add_element" />
     <fragment
         android:id="@+id/nav_remove_element"
         android:name="com.example.wirtualnaszafa.ui.remove_element.RemoveElementFragment"
-        android:label="fragment_remove_element"
+        android:label="@string/menu_remove_element"
         tools:layout="@layout/fragment_remove_element" />
     <fragment
         android:id="@+id/nav_randomize"
         android:name="com.example.wirtualnaszafa.ui.randomize.RandomizeFragment"
-        android:label="fragment_randomize"
+        android:label="@string/menu_randomize"
         tools:layout="@layout/fragment_randomize" />
     <fragment
         android:id="@+id/nav_collections"
         android:name="com.example.wirtualnaszafa.ui.collections.CollectionsFragment"
-        android:label="fragment_collections"
+        android:label="@string/menu_collection"
         tools:layout="@layout/fragment_collections" />
 
 

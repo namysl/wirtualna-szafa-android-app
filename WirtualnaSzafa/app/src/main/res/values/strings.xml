@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Wirtualna Szafa</string>
     <string name="navigation_drawer_open">Otwórz menu</string>
@@ -7,12 +8,14 @@
     <string name="nav_header_desc">Menu</string>
     <string name="action_settings">Opcje</string>
 
+    <!-- activity_main_drawer.xml & mobile_navigation.xml -->
     <string name="menu_home">Strona główna</string>
     <string name="menu_gallery">Galeria</string>
     <string name="menu_add_element">Dodaj element</string>
     <string name="menu_remove_element">Usuń element</string>
-    <string name="menu_randomize">Przeglądaj wylosowane zestawy</string>
-    <string name="menu_collection">Placeholder</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="menu_randomize">Przeglądaj wylosowane</string>
+    <string name="menu_collection">Placeholder #1</string>
+
+    <!-- placeholder texts in java files -->
+    <string name="hello_blank_fragment">Placeholder text #1</string>
 </resources>
