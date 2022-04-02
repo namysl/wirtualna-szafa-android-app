@@ -16,6 +16,14 @@
     <string name="menu_randomize">Przeglądaj wylosowane</string>
     <string name="menu_collection">Placeholder #1</string>
 
+    <!-- fragment_add_element -->
+    <string name="save_photo">Zapisz</string>
+    <string name="cancel_photo">Anuluj</string>
+    <string name="add_from_gallery">Dodaj zdjęcie z galerii</string>
+    <string name="add_from_camera">Zrób zdjęcie</string>
+    <string name="add_tag_placeholder">Dodaj tag:</string>
+    <string name="add_photoimgview">Dodane zdjęcie</string>
+
     <!-- placeholder texts in java files -->
     <string name="hello_blank_fragment">Placeholder text #1</string>
 </resources>
