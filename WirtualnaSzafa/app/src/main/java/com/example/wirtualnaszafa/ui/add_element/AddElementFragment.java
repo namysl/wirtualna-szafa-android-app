@@ -1,5 +1,6 @@
 package com.example.wirtualnaszafa.ui.add_element;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -85,7 +86,14 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         switch (v.getId()) {
             case R.id.button_add_from_gallery:
                 System.out.println("kurwa mać galeria!!!");
+
                 //tutaj wyciaganie zdjecia z galerii
+
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST_CODE);
+
                 break;
             case R.id.button_add_from_camera:
                 System.out.println("kamera");
