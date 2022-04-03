@@ -21,7 +21,7 @@
     <string name="cancel_photo">Anuluj</string>
     <string name="add_from_gallery">Dodaj zdjęcie z galerii</string>
     <string name="add_from_camera">Zrób zdjęcie</string>
-    <string name="add_tag_placeholder">Dodaj tag:</string>
+    <string name="add_tag_placeholder">PLACEHOLDER TAG</string>
     <string name="add_photoimgview">Dodane zdjęcie</string>
 
     <!-- placeholder texts in java files -->
