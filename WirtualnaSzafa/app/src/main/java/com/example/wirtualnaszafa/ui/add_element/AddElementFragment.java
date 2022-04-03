@@ -146,12 +146,12 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             String picturePath = cursor.getString(columnIndex);
             System.out.println("PATH!! " + picturePath);
-            String dir = picturePath;
-            System.out.println("DIR " + dir);
-            File mypath = new File(dir, "profile.jpg");
 
-            selectedImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-
+            if (onRequestPermissionsResult(requestCode, resultCode, data)) {
+                selectedImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+            }else{
+                System.out.println("gunwo");
+            }
             cursor.close();
         } else {
             Toast.makeText(getActivity(), "Try Again!!", Toast.LENGTH_SHORT).show();
@@ -159,6 +159,23 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case 1:
+            {
+                if (grantResults.length > 0 &&
+                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, do something you want
+                } else {
+                    // permission denied
+                    Toast.makeText(getContext().getApplicationContext(), "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
 //    public void open_gallery(){
 //        Intent intent = new Intent();
 //        intent.setType("image/*");
