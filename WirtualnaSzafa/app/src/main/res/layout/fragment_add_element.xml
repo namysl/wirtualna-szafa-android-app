@@ -10,22 +10,22 @@
         android:id="@+id/button_add_from_gallery"
         android:layout_width="340dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="4dp"
         android:text="@string/add_from_gallery"
         app:layout_constraintBottom_toTopOf="@+id/button_add_from_camera"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/button_add_from_camera"
         android:layout_width="340dp"
         android:layout_height="60dp"
-        android:layout_marginBottom="188dp"
+        android:layout_marginBottom="116dp"
         android:text="@string/add_from_camera"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
@@ -35,33 +35,37 @@
         android:text="@string/save_photo"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/button_add_from_camera"
-        app:layout_constraintVertical_bias="0.254" />
+        app:layout_constraintVertical_bias="0.147" />
 
     <TextView
         android:id="@+id/textView_tag_photo"
-        android:layout_width="340dp"
-        android:layout_height="50dp"
-        android:layout_marginBottom="32dp"
+        android:layout_width="338dp"
+        android:layout_height="29dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="sans-serif-smallcaps"
         android:text="@string/add_tag_placeholder"
+        android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="24sp"
+        android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/imageView_add_photo"
-        android:layout_width="130dp"
-        android:layout_height="142dp"
+        android:layout_width="216dp"
+        android:layout_height="304dp"
         android:contentDescription="@string/add_photoimgview"
         android:src="@drawable/ic_hanger"
         app:layout_constraintBottom_toTopOf="@+id/textView_tag_photo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.947" />
+        app:layout_constraintVertical_bias="0.879" />
 </androidx.constraintlayout.widget.ConstraintLayout>

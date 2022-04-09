@@ -3,18 +3,13 @@ package com.example.wirtualnaszafa.ui.add_element;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -29,41 +24,22 @@ import android.widget.Toast;
 
 import com.example.wirtualnaszafa.R;
 
-import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link AddElementFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AddElementFragment extends Fragment implements View.OnClickListener {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    private static final int GALLERY_REQUEST_CODE = 100;
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
     Button button_gallery, button_camera, button_save;
-    ImageView selectedImageView;
+    private ImageView imageView;
+    public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
+    public static final int RESULT_CANCELED = 0;
+    public static final int RESULT_OK = -1;
 
     public AddElementFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment collections.
-     */
-    // TODO: Rename and change types and number of parameters
+    /*
     public static AddElementFragment newInstance(String param1, String param2) {
         AddElementFragment fragment = new AddElementFragment();
         Bundle args = new Bundle();
@@ -72,16 +48,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         fragment.setArguments(args);
         return fragment;
     }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+*/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -95,7 +62,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         button_camera.setOnClickListener(this);
         button_save.setOnClickListener(this);
 
-        selectedImageView = (ImageView) rootView.findViewById(R.id.imageView_add_photo);
+        imageView = (ImageView) rootView.findViewById(R.id.imageView_add_photo);
 
         return rootView;
     }
@@ -103,83 +70,113 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_add_from_gallery:
-                Toast.makeText(v.getContext(), "Kliknięto GALERIA", Toast.LENGTH_SHORT).show();
-                open_gallery();
-                break;
-            case R.id.button_add_from_camera:
-                Toast.makeText(v.getContext(), "Kliknięto KAMERA", Toast.LENGTH_SHORT).show();
-                //kamera ma popieprzone permissions, nie ogarniam tego
-                break;
-            case R.id.button_save_photo:
-                Toast.makeText(v.getContext(), "Kliknięto ZAPISZ", Toast.LENGTH_SHORT).show();
-                //zapis do bazy zdjęć
-                break;
-
-            //dodawanie tagów zrobić później
+        //first check permissions, then decide what to do
+        if(checkAndRequestPermissions(getActivity())){
+            switch (v.getId()) {
+                case R.id.button_add_from_gallery:
+                    //choose from external storage
+                    Intent pickPhoto = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(pickPhoto , 1);
+                    break;
+                case R.id.button_add_from_camera:
+                    //open camera and snap the photo
+                    Intent takePicture = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(takePicture, 0);
+                    break;
+                case R.id.button_save_photo:
+                    Toast.makeText(v.getContext(), "Kliknięto ZAPISZ", Toast.LENGTH_SHORT).show();
+                    break;
+            }
         }
     }
 
-    public void open_gallery(){
-        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        try {
-            i.putExtra("return-data", true);
-            startActivityForResult(Intent.createChooser(i, "Select Picture"), 100);
-            System.out.println("tutaj");
-        }catch (ActivityNotFoundException ex){
-            ex.printStackTrace();
+    public static boolean checkAndRequestPermissions(final Activity context) {
+        //check permissions
+        int WExtstorePermission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int cameraPermission = ContextCompat.checkSelfPermission(context,
+                Manifest.permission.CAMERA);
+        List<String> listPermissionsNeeded = new ArrayList<>();
+        if (cameraPermission != PackageManager.PERMISSION_GRANTED){
+            listPermissionsNeeded.add(Manifest.permission.CAMERA);
+        }
+        if (WExtstorePermission != PackageManager.PERMISSION_GRANTED){
+            listPermissionsNeeded.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        }
+        if (!listPermissionsNeeded.isEmpty()){
+            ActivityCompat.requestPermissions(context, listPermissionsNeeded.toArray(new String[0]),
+                                              REQUEST_ID_MULTIPLE_PERMISSIONS);
+            return false;
+        }
+        return true;
+    }
+
+
+    // Handles permission result
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_ID_MULTIPLE_PERMISSIONS) {
+            if (ContextCompat.checkSelfPermission(getContext(),
+                    Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext().getApplicationContext(),
+                        "Requires access to camera.", Toast.LENGTH_SHORT)
+                        .show();
+
+            } else if (ContextCompat.checkSelfPermission(getContext(),
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(getContext().getApplicationContext(),
+                        "Requires access to your storage.",
+                        Toast.LENGTH_SHORT).show();
+
+            } else {
+                System.out.println("Uzyskano dostęp");
+            }
         }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // BitmapFactory: Unable to decode stream: java.io.FileNotFoundException:
-        // /storage/emulated/0/Download/YU986-00P-040-1_12.jpg: open failed: EACCES (Permission denied)
-        if (data != null) {
-            Uri selectedImage = data.getData(); //imageURI
-
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
-            Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn, null, null, null);
-
-            cursor.moveToFirst();
-            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            String picturePath = cursor.getString(columnIndex);
-            System.out.println("PATH!! " + picturePath);
-
-            if (onRequestPermissionsResult(requestCode, resultCode, data)) {
-                selectedImageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-            }else{
-                System.out.println("gunwo");
-            }
-            cursor.close();
-        } else {
-            Toast.makeText(getActivity(), "Try Again!!", Toast.LENGTH_SHORT).show();
-        }
         super.onActivityResult(requestCode, resultCode, data);
-    }
+        if (resultCode != RESULT_CANCELED) {
+            switch (requestCode) {
+                case 0:
+                    if (resultCode == RESULT_OK && data != null) {
+                        Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
+                        imageView.setImageBitmap(selectedImage);
+                    }
+                    break;
+                case 1:
+                    if (resultCode == RESULT_OK && data != null) {
+//                        Uri selectedImage = data.getData();
+//                        String[] filePathColumn = {MediaStore.Images.Media.DATA};
+//                        if (selectedImage != null) {
+//                            Cursor cursor = getContentResolver().query(selectedImage, filePathColumn, null, null, null);
+//                            if (cursor != null) {
+//                                cursor.moveToFirst();
+//
+//                                int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+//                                String picturePath = cursor.getString(columnIndex);
+//                                imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+//                                cursor.close();
+//                            }
+//                        }
+                        Uri selectedImage = data.getData();
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1:
-            {
-                if (grantResults.length > 0 &&
-                        grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, do something you want
-                } else {
-                    // permission denied
-                    Toast.makeText(getContext().getApplicationContext(), "Permission denied to read your External storage", Toast.LENGTH_SHORT).show();
-                }
-                return;
+                        Bitmap bitmap = null;
+                        try {
+                            bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        //Bitmap resized = Bitmap.createScaledBitmap(bitmap, 100, 100, true);
+                        imageView.setImageBitmap(bitmap);
+
+                    }
+                    break;
             }
         }
     }
-//    public void open_gallery(){
-//        Intent intent = new Intent();
-//        intent.setType("image/*");
-//        intent.setAction(Intent.ACTION_GET_CONTENT);
-//        startActivityForResult(Intent.createChooser(intent, "Select Picture"), GALLERY_REQUEST_CODE);
-//    }
+
+
 }
