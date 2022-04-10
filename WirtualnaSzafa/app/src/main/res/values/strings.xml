@@ -6,7 +6,9 @@
     <string name="nav_header_title">Wirtualna Szafa</string>
     <string name="nav_header_subtitle">v0.4</string>
     <string name="nav_header_desc">Menu</string>
-    <string name="action_settings">Opcje</string>
+
+    <string name="dotmenu_lighttheme">Jasny motyw</string>
+    <string name="dotmenu_darktheme">Ciemny motyw</string>
 
     <!-- placeholder texts in java files -->
     <string name="hello_blank_fragment">PLACEHOLDER TEXT</string>
