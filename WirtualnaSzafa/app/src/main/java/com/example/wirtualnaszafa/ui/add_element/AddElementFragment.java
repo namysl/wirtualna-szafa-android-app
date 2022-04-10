@@ -84,6 +84,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
+                        //tutaj API POST, żeby wysłać
                         Toast.makeText(v.getContext(), "Zapisano !!WIP API+storage!!", Toast.LENGTH_SHORT).show();
                     }
                     break;

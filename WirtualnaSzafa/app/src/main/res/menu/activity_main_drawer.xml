@@ -22,17 +22,25 @@
             android:id="@+id/nav_remove_element"
             android:icon="@drawable/ic_menu_remove_element"
             android:title="@string/menu_remove_element"/>
+    </group>
+    <group
+        android:id="@+id/menu_middle"
+        android:checkableBehavior="none">
         <item
             android:id="@+id/nav_randomize"
             android:icon="@drawable/ic_menu_randomize"
             android:title="@string/menu_randomize"/>
+        <item
+            android:id="@+id/nav_collections"
+            android:icon="@drawable/ic_menu_collection"
+            android:title="@string/menu_collection"/>
     </group>
     <!-- horizontal separator -->
     <group
         android:id="@+id/menu_bottom"
         android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_register"
+            android:id="@+id/nav_account"
             android:icon="@drawable/ic_account"
             android:title="@string/menu_account"/>
     </group>

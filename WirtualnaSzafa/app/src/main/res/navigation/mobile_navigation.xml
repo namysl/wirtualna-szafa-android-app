@@ -36,7 +36,7 @@
         android:label="@string/menu_collection"
         tools:layout="@layout/fragment_collections" />
     <fragment
-        android:id="@+id/nav_register"
+        android:id="@+id/nav_account"
         android:name="com.example.wirtualnaszafa.ui.account.AccountFragment"
         android:label="@string/menu_account"
         tools:layout="@layout/fragment_account" />

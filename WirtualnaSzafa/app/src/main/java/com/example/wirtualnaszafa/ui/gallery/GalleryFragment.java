@@ -1,15 +1,14 @@
 package com.example.wirtualnaszafa.ui.gallery;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.wirtualnaszafa.R;
 
@@ -18,8 +17,8 @@ public class GalleryFragment extends Fragment {
 
     //we should import photos and tags from app or do it with API, dunno
     private String[] brands = {"tag1", "tag2", "tag3", "tag4",
-            "tag4", "tag5", "tag6", "tag7"};
-    private int[] images = {R.color.lightbrown,
+            "tag4", "tag5", "tag6"};
+    private int[] images = {
             R.color.orange,
             R.color.white,
             R.color.black,

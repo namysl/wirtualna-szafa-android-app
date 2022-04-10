@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/display_saved_img"
-        android:layout_width="400dp"
-        android:layout_height="522dp"
+        android:layout_width="399dp"
+        android:layout_height="463dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:contentDescription="@string/add_photoimgview"

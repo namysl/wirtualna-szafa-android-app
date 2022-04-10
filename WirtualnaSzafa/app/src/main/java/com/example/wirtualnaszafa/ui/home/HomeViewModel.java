@@ -10,7 +10,8 @@ public class HomeViewModel extends ViewModel {
 
     public HomeViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("Jesteś w Home");
+        mText.setValue("Wirtualna Szafa\nto aplikacja modowa\n" +
+                       "do katalogowania i losowania zestawów ubrań.");
     }
 
     public LiveData<String> getText() {
