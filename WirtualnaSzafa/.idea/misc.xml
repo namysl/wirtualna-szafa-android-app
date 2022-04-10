@@ -4,25 +4,35 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1425" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_baseline_account_.xml" value="0.2365" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_hanger.xml" value="0.2365" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1425" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_logo.xml" value="0.1" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_menu_add_element.xml" value="0.2365" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_menu_camera.xml" value="0.14" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_menu_collection.xml" value="0.2365" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_menu_gallery.xml" value="0.1035" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_menu_randomize.xml" value="0.2365" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_menu_remove_element.xml" value="0.2365" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_menu_slideshow.xml" value="0.1035" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/ic_register.xml" value="0.2365" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/menu_side_nav_bar_bg.xml" value="0.336" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/drawable/side_nav_bar.xml" value="0.1035" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/activity_main.xml" value="0.2653985507246377" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/app_bar_main.xml" value="0.33" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/content_main.xml" value="0.25" />
-        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_add_element.xml" value="0.33" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_add_element.xml" value="0.22" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_collections.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_gallery.xml" value="0.2653985507246377" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_gallery_scroll.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_gallery_singleitem.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_home.xml" value="0.2653985507246377" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_randomize.xml" value="0.25364583333333335" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_registration.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_remove_element.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/fragment_slideshow.xml" value="0.2653985507246377" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/nav_header_main.xml" value="0.2653985507246377" />
+        <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/register.xml" value="0.27314814814814814" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/layout/singleitem.xml" value="0.23958333333333334" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/menu/activity_main_drawer.xml" value="0.67" />
         <entry key="..\:/Users/eknam/Desktop/git-repo/android-projects/WirtualnaSzafa/app/src/main/res/menu/main.xml" value="0.33" />

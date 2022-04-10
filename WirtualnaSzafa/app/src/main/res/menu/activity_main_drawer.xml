@@ -3,7 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-    <group android:checkableBehavior="single">
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_hanger"
@@ -24,10 +26,14 @@
             android:id="@+id/nav_randomize"
             android:icon="@drawable/ic_menu_randomize"
             android:title="@string/menu_randomize"/>
+    </group>
+    <!-- horizontal separator -->
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_collections"
-            android:icon="@drawable/ic_menu_collection"
-            android:title="@string/menu_collection"/>
-
+            android:id="@+id/nav_register"
+            android:icon="@drawable/ic_account"
+            android:title="@string/menu_account"/>
     </group>
 </menu>

@@ -19,7 +19,7 @@ public class GalleryFragment extends Fragment {
     //we should import photos and tags from app or do it with API, dunno
     private String[] brands = {"tag1", "tag2", "tag3", "tag4",
             "tag4", "tag5", "tag6", "tag7"};
-    private int[] images = {R.color.darkbrown,
+    private int[] images = {R.color.lightbrown,
             R.color.orange,
             R.color.white,
             R.color.black,

@@ -8,22 +8,36 @@
     <string name="nav_header_desc">Menu</string>
     <string name="action_settings">Opcje</string>
 
-    <!-- activity_main_drawer.xml & mobile_navigation.xml -->
-    <string name="menu_home">Strona główna</string>
-    <string name="menu_gallery">Galeria</string>
-    <string name="menu_add_element">Dodaj element</string>
+    <!-- placeholder texts in java files -->
+    <string name="hello_blank_fragment">PLACEHOLDER TEXT</string>
+
+    <!-- activity_main_drawer.xml & mobile_navigation.xml TODO-->
     <string name="menu_remove_element">Usuń element</string>
     <string name="menu_randomize">Przeglądaj wylosowane</string>
-    <string name="menu_collection">Placeholder #1</string>
+    <string name="menu_collection">Zapisane kolekcje</string>
+
+    <!-- fragment_main & MainActivity -->
+    <string name="menu_home">Strona główna</string>
+
+    <!-- fragment_gallery -->
+    <string name="menu_gallery">Galeria</string>
 
     <!-- fragment_add_element -->
+    <string name="menu_add_element">Dodaj element</string>
     <string name="save_photo">Zapisz</string>
     <string name="cancel_photo">Anuluj</string>
     <string name="add_from_gallery">Dodaj zdjęcie z galerii</string>
     <string name="add_from_camera">Zrób zdjęcie</string>
-    <string name="add_tag_placeholder">PLACEHOLDER TAG</string>
+    <string name="add_tag_placeholder">TAG</string>
+    <string name="add_color_placeholer">KOLOR</string>
     <string name="add_photoimgview">Dodane zdjęcie</string>
 
-    <!-- placeholder texts in java files -->
-    <string name="hello_blank_fragment">Placeholder text #1</string>
+    <!-- fragment_account -->
+    <string name="menu_account">Twoje konto</string>
+    <string name="register_button">Zarejestruj</string>
+    <string name="login">Zaloguj się</string>
+    <string name="account_email">Email</string>
+    <string name="account_password">Hasło</string>
+    <string name="account_username">Nazwa użytkownika</string>
+
 </resources>

@@ -9,10 +9,12 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -29,6 +31,7 @@ import java.util.List;
 
 public class AddElementFragment extends Fragment implements View.OnClickListener{
     Button button_gallery, button_camera, button_save;
+    EditText tag_editT, color_editT;
     private ImageView imageView;
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
     public static final int RESULT_CANCELED = 0;
@@ -42,6 +45,9 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         button_gallery = (Button) rootView.findViewById(R.id.button_add_from_gallery);
         button_camera = (Button) rootView.findViewById(R.id.button_add_from_camera);
         button_save = (Button) rootView.findViewById(R.id.button_save_photo);
+
+        tag_editT = rootView.findViewById(R.id.editText_tag_photo);
+        color_editT = rootView.findViewById(R.id.editText_color_photo);
 
         button_gallery.setOnClickListener(this);
         button_camera.setOnClickListener(this);
@@ -69,12 +75,25 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                     startActivityForResult(takePicture, 0);
                     break;
                 case R.id.button_save_photo:
-                    Toast.makeText(v.getContext(), "Kliknięto ZAPISZ", Toast.LENGTH_SHORT).show();
                     //save picked photo to internal memory of app and/or use API
-                    //REMEMBER ABOUT TAGS!!!
+
+                    System.out.println(tag_editT.getText());
+                    System.out.println(color_editT.getText()); //.toString());
+
+                    if(isEmpty(tag_editT) || isEmpty(color_editT)){  // uwzględnić kategorie tagów?
+                        Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(v.getContext(), "Zapisano !!WIP API+storage!!", Toast.LENGTH_SHORT).show();
+                    }
                     break;
             }
         }
+    }
+
+    boolean isEmpty(EditText text) {
+        CharSequence str = text.getText().toString();
+        return TextUtils.isEmpty(str);
     }
 
     public static boolean checkAndRequestPermissions(final Activity context){
@@ -124,6 +143,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_CANCELED){
+            System.out.println("DATA1: " + data);
             switch (requestCode){
                 case 0:
                     //camera
@@ -149,6 +169,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                     }
                     break;
             }
+            System.out.println("DATA2: " + data.getData());
         }
     }
 }
