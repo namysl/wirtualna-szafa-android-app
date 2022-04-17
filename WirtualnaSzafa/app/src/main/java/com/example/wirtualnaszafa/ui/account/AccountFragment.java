@@ -14,9 +14,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.wirtualnaszafa.R;
 
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import okhttp3.*; //build.gradle -> implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+import java.io.*;
 
 public class AccountFragment extends Fragment implements View.OnClickListener{
     public static final Pattern VALID_EMAIL_ADDRESS_REGEX =
@@ -30,8 +33,8 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                              Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.fragment_account, container, false);
 
-        button_register = (Button) rootView.findViewById(R.id.button_register);
-        button_login = (Button) rootView.findViewById(R.id.button_login);
+        button_register = rootView.findViewById(R.id.button_register);
+        button_login = rootView.findViewById(R.id.button_login);
 
         email_editT = rootView.findViewById(R.id.editTextEmail);
         password_editT = rootView.findViewById(R.id.editTextPassword);
@@ -59,13 +62,49 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
             }
             else {
                 //register or login?
+                OkHttpClient client = new OkHttpClient().newBuilder()
+                        .build();
+                MediaType mediaType = MediaType.parse("text/plain");
+                RequestBody body = RequestBody.create(mediaType, "");
+
                 if (v.getId() == R.id.button_register){
-                    //tutaj API rejestracja - użyć Unirest albo OkHttp
-                    //if (API response == 200){  udało się zarejestrować, mamy klucz autoryzacyjny
-                    //tylko co potem robimy z tym kluczem?
-                        Toast.makeText(v.getContext(), "Zarejestrowano !!WIP API!!", Toast.LENGTH_SHORT).show();
-                    //}
-                    //else{ email zajęty np., wypisz wiadomość ze zwróconego jsona w toast, try again, bla bla
+                    //API rejestracja
+                    //"http://adrinna-pilawa-314-a-2022-04.int.heag.live/api/user/register?email=emailB@email.com&password=securepassword123&device_name=AndroidSmartphone&name=Annie"
+                    String url_data = "https://adrinna-pilawa-314-a-2022-04.int.heag.live/api/user/register?email=";
+                    url_data += email_editT.getText().toString() + "&password=" + password_editT.getText().toString();
+                    url_data += "&device_name=AndroidSmartphone&name=" + username_editT.getText().toString();
+                    System.out.println("url_data: " + url_data);
+
+                    Request request = new Request.Builder()
+                            .url(url_data)
+                            .method("POST", body)
+                            .addHeader("Accept", "application/json")
+                            .build();
+
+                    new Thread(new Runnable(){
+                        @Override
+                        public void run() {
+                            try {
+                                Response response = client.newCall(request).execute();
+                                System.out.println("RESPONSE: " + response.body().string());
+                                //tutaj się coś pierdoli z protokołem SSL
+
+
+
+
+
+
+                                //if (API response == 200){  udało się zarejestrować, mamy klucz autoryzacyjny
+                                //tylko co potem robimy z tym kluczem?
+                                Toast.makeText(v.getContext(), "Zarejestrowano !!NIEPRZETESTOWANE!!", Toast.LENGTH_SHORT).show();
+                                //}
+                                //else{ email zajęty np., wypisz wiadomość ze zwróconego jsona w toast, try again, bla bla
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }).start();
                 }
                 else if(v.getId() == R.id.button_login){
                     //tutaj API logowanie, tj. wyżej przy rejestracji
