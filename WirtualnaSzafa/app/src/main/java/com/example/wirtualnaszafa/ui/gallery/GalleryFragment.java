@@ -1,5 +1,7 @@
 package com.example.wirtualnaszafa.ui.gallery;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +14,16 @@ import androidx.fragment.app.Fragment;
 
 import com.example.wirtualnaszafa.R;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class GalleryFragment extends Fragment {
     private LinearLayout linearLayout;
 
     //we should import photos and tags from app or do it with API, dunno
     private String[] brands = {"tag1", "tag2", "tag3", "tag4",
-            "tag4", "tag5", "tag6"};
+            "tag5", "tag6", "tag7"};
     private int[] images = {
             R.color.orange,
             R.color.white,
@@ -35,11 +41,13 @@ public class GalleryFragment extends Fragment {
         linearLayout = rootView.findViewById(R.id.linear1);
         LayoutInflater layoutInflater = LayoutInflater.from(getContext());
 
+
         for(int i = 0; i < brands.length; i++) {
             View view = layoutInflater.inflate(R.layout.fragment_gallery_singleitem, linearLayout, false);
 
             ImageView imageView = view.findViewById(R.id.display_saved_img);
-            imageView.setImageResource(images[i]);
+            //imageView.setImageResource(images[i]);
+            loadImageFromStorage("/data/user/0/com.example.wirtualnaszafa/app_imageDir", imageView);
 
             TextView tv = view.findViewById(R.id.display_tag);
             tv.setText(brands[i]);
@@ -48,5 +56,16 @@ public class GalleryFragment extends Fragment {
         }
 
         return rootView;
+    }
+
+    private void loadImageFromStorage(String path, ImageView img){
+        try{
+            File f=new File(path, "profile.jpg");
+            Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
+            img.setImageBitmap(b);
+        }
+        catch (FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 }

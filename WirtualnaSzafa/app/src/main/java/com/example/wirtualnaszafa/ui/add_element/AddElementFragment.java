@@ -3,9 +3,12 @@ package com.example.wirtualnaszafa.ui.add_element;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -25,6 +28,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.wirtualnaszafa.R;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,9 +47,9 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         //needed elements in the fragment
         View rootView = inflater.inflate(R.layout.fragment_add_element, container, false);
 
-        button_gallery = (Button) rootView.findViewById(R.id.button_add_from_gallery);
-        button_camera = (Button) rootView.findViewById(R.id.button_add_from_camera);
-        button_save = (Button) rootView.findViewById(R.id.button_save_photo);
+        button_gallery = rootView.findViewById(R.id.button_add_from_gallery);
+        button_camera = rootView.findViewById(R.id.button_add_from_camera);
+        button_save = rootView.findViewById(R.id.button_save_photo);
 
         tag_editT = rootView.findViewById(R.id.editText_tag_photo);
         color_editT = rootView.findViewById(R.id.editText_color_photo);
@@ -53,7 +58,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         button_camera.setOnClickListener(this);
         button_save.setOnClickListener(this);
 
-        imageView = (ImageView) rootView.findViewById(R.id.imageView_add_photo);
+        imageView = rootView.findViewById(R.id.imageView_add_photo);
 
         return rootView;
     }
@@ -84,12 +89,40 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        //tutaj API POST, żeby wysłać
-                        Toast.makeText(v.getContext(), "Zapisano !!WIP API+storage!!", Toast.LENGTH_SHORT).show();
+//                      //tu API heh
+                        String picture = saveToInternalStorage(((BitmapDrawable)imageView.getDrawable()).getBitmap());
+                        System.out.println("SHOW MY DIR: " + picture);
+                        //chyba działa! jeszcze zapisać gdzieś dir do zdjęć
+                        Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
                     }
                     break;
             }
         }
+    }
+
+    private String saveToInternalStorage(Bitmap bitmapImage){
+        ContextWrapper cw = new ContextWrapper(getContext());
+        // path to /data/data/yourapp/app_data/imageDir
+        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+        // Create imageDir
+        File mypath = new File(directory,"profile.jpg");
+
+        FileOutputStream fos = null;
+        try{
+            fos = new FileOutputStream(mypath);
+            // Use the compress method on the BitMap object to write image to the OutputStream
+            bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }finally{
+            try{
+                fos.close();
+            }catch (IOException e){
+                e.printStackTrace();
+            }
+        }
+        return directory.getAbsolutePath();
     }
 
     boolean isEmpty(EditText text) {
