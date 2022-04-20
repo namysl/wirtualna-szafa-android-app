@@ -6,8 +6,8 @@
 
     <ImageView
         android:id="@+id/display_saved_img"
-        android:layout_width="399dp"
-        android:layout_height="463dp"
+        android:layout_width="400dp"
+        android:layout_height="460dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:contentDescription="@string/add_photoimgview" />
@@ -15,7 +15,17 @@
     <TextView
         android:id="@+id/display_tag"
         android:layout_width="400dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:gravity="center"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/display_color"
+        android:layout_width="400dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:gravity="center"

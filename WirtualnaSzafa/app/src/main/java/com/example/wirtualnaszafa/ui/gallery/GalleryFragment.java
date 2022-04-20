@@ -27,10 +27,14 @@ public class GalleryFragment extends Fragment {
     private LinearLayout linearLayout;
     private AppDB appDB;
 
-    //we should import photos and tags from app or do it with API, dunno
+    String[] path = {};
+    String[] tag = {};
+    String[] color = {};
+
+
+    //PLACEHOLDERS: delete later
     private String[] brands = {"tag1", "tag2", "tag3", "tag4",
             "tag5", "tag6", "tag7"};
-
     private String[] img = {"/data/user/0/com.example.wirtualnaszafa/app_UdHUFAt9ZXD1h5GhmCZn",
         "/data/user/0/com.example.wirtualnaszafa/app_MzUwYePEqbsnJ9ghSrBZ"};
 
@@ -48,23 +52,21 @@ public class GalleryFragment extends Fragment {
             View view = layoutInflater.inflate(R.layout.fragment_gallery_singleitem, linearLayout, false);
 
             ImageView imageView = view.findViewById(R.id.display_saved_img);
-            //imageView.setImageResource(img[i]);
-            //loadImageFromStorage("/data/user/0/com.example.wirtualnaszafa/app_imageDir", imageView);
             loadImageFromStorage(img[i], imageView);
 
-            TextView tv = view.findViewById(R.id.display_tag);
-            tv.setText(brands[i]);
+            TextView tv_tag = view.findViewById(R.id.display_tag);
+            TextView tv_color = view.findViewById(R.id.display_color);
+            tv_tag.setText(brands[i]);
+            tv_color.setText("Tutaj kolor");
 
             linearLayout.addView(view);
         }
-
         return rootView;
     }
 
     private void getTasks() {
-        //returns obj
+        //retrieve data from DB
         class GetTasks extends AsyncTask<Void, Void, List<WardrobeDB>> {
-
             @Override
             protected List<WardrobeDB> doInBackground(Void... voids) {
                 List<WardrobeDB> taskList = ClientDB
@@ -92,10 +94,9 @@ public class GalleryFragment extends Fragment {
         gt.execute();
     }
 
-
     private void loadImageFromStorage(String path, ImageView img){
         try{
-            File f=new File(path, "profile.jpg");
+            File f = new File(path, "profile.jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
             img.setImageBitmap(b);
         }
