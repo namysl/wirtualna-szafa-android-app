@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -31,12 +32,12 @@ public class GalleryFragment extends Fragment {
     String[] tag = {};
     String[] color = {};
 
-
-    //PLACEHOLDERS: delete later
+    //PLACEHOLDERS: delete later TODO
     private String[] brands = {"tag1", "tag2", "tag3", "tag4",
             "tag5", "tag6", "tag7"};
     private String[] img = {"/data/user/0/com.example.wirtualnaszafa/app_UdHUFAt9ZXD1h5GhmCZn",
         "/data/user/0/com.example.wirtualnaszafa/app_MzUwYePEqbsnJ9ghSrBZ"};
+    //PLACEHOLDERS: delete later
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -58,6 +59,8 @@ public class GalleryFragment extends Fragment {
             TextView tv_color = view.findViewById(R.id.display_color);
             tv_tag.setText(brands[i]);
             tv_color.setText("Tutaj kolor");
+
+            Button button_del = view.findViewById(R.id.button_delete);
 
             linearLayout.addView(view);
         }

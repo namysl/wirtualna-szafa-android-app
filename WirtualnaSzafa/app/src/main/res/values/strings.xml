@@ -23,6 +23,7 @@
 
     <!-- fragment_gallery -->
     <string name="menu_gallery">Galeria</string>
+    <string name="button_gallery_delete">Usuń element</string>
 
     <!-- fragment_add_element -->
     <string name="menu_add_element">Dodaj element</string>

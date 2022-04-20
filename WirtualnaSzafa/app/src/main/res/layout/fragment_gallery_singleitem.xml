@@ -15,7 +15,7 @@
     <TextView
         android:id="@+id/display_tag"
         android:layout_width="400dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:gravity="center"
@@ -25,10 +25,18 @@
     <TextView
         android:id="@+id/display_color"
         android:layout_width="400dp"
-        android:layout_height="40dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="5dp"
         android:layout_marginRight="5dp"
         android:gravity="center"
         android:textSize="20sp"
         android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button_delete"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:drawableLeft="@drawable/ic_button_delete"
+        android:text="@string/button_gallery_delete" />
 </LinearLayout>
