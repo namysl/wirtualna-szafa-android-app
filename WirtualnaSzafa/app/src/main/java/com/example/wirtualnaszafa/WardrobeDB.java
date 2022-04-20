@@ -21,7 +21,6 @@ public class WardrobeDB implements Serializable {
     private String color;
 
     //getters & setters
-
     public int getId() {
         return id;
     }

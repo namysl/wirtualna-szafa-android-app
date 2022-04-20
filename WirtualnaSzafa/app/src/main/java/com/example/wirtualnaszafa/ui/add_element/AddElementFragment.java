@@ -10,6 +10,7 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
@@ -26,11 +27,15 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
+import com.example.wirtualnaszafa.ClientDB;
+import com.example.wirtualnaszafa.MainActivity;
 import com.example.wirtualnaszafa.R;
+import com.example.wirtualnaszafa.WardrobeDB;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +46,8 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
     public static final int RESULT_CANCELED = 0;
     public static final int RESULT_OK = -1;
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    static SecureRandom rnd = new SecureRandom();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
@@ -89,11 +96,36 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
-//                      //tu API heh
                         String picture = saveToInternalStorage(((BitmapDrawable)imageView.getDrawable()).getBitmap());
                         System.out.println("SHOW MY DIR: " + picture);
-                        //chyba działa! jeszcze zapisać gdzieś dir do zdjęć
-                        Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
+
+                        class SaveTask extends AsyncTask<Void, Void, Void> {
+
+                            @Override
+                            protected Void doInBackground(Void... voids) {
+                                //adding new clothing
+                                WardrobeDB task = new WardrobeDB();
+                                task.setPath(picture);
+                                task.setTag(tag_editT.getText().toString());
+                                task.setColor(color_editT.getText().toString());
+
+                                //adding to database
+                                ClientDB.getInstance(getContext()).getAppDatabase()
+                                        .wardrobeDAO()
+                                        .insert(task);
+                                return null;
+                            }
+
+                            @Override
+                            protected void onPostExecute(Void aVoid) {
+                                super.onPostExecute(aVoid);
+                                getActivity().finish();
+                                startActivity(new Intent(getContext(), MainActivity.class));
+                                Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        SaveTask st = new SaveTask();
+                        st.execute();
                     }
                     break;
             }
@@ -103,7 +135,8 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
     private String saveToInternalStorage(Bitmap bitmapImage){
         ContextWrapper cw = new ContextWrapper(getContext());
         // path to /data/data/yourapp/app_data/imageDir
-        File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
+
+        File directory = cw.getDir(randomString(20), Context.MODE_PRIVATE);
         // Create imageDir
         File mypath = new File(directory,"profile.jpg");
 
@@ -129,6 +162,15 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         CharSequence str = text.getText().toString();
         return TextUtils.isEmpty(str);
     }
+
+
+    String randomString(int len){
+        StringBuilder sb = new StringBuilder(len);
+        for(int i = 0; i < len; i++)
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+        return sb.toString();
+    }
+
 
     public static boolean checkAndRequestPermissions(final Activity context){
         //check permissions
