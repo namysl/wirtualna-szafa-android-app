@@ -21,11 +21,11 @@ public class WardrobeDB implements Serializable {
     private String color;
 
     //getters & setters
-    public int getId() {
+    public int getId(){
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(int id){
         this.id = id;
     }
 
@@ -33,23 +33,23 @@ public class WardrobeDB implements Serializable {
         return path;
     }
 
-    public void setPath(String path) {
+    public void setPath(String path){
         this.path = path;
     }
 
-    public String getTag() {
+    public String getTag(){
         return tag;
     }
 
-    public void setTag(String tag) {
+    public void setTag(String tag){
         this.tag = tag;
     }
 
-    public String getColor() {
+    public String getColor(){
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(String color){
         this.color = color;
     }
 }

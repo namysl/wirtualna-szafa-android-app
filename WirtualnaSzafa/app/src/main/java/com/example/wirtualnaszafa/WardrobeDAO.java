@@ -10,12 +10,13 @@ import java.util.List;
 
 //DAO = data access objects
 @Dao
-public interface WardrobeDAO {
+public interface WardrobeDAO{
     @Query("SELECT * FROM WardrobeDB")
     List<WardrobeDB> getAll();
 
-    @Query("SELECT path FROM WardrobeDB")
-    List<String> findPath();
+//    @Query("SELECT path FROM WardrobeDB")
+//    List<String> findPath();
+    //TODO potrzebne sql query dla tagów i kolorów
 
     @Insert
     void insert(WardrobeDB wardrobeDB);
