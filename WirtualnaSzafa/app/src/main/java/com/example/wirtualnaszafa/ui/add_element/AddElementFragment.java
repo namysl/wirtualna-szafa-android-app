@@ -28,7 +28,6 @@ import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import com.example.wirtualnaszafa.ClientDB;
-import com.example.wirtualnaszafa.MainActivity;
 import com.example.wirtualnaszafa.R;
 import com.example.wirtualnaszafa.WardrobeDB;
 
@@ -43,9 +42,11 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
     Button button_gallery, button_camera, button_save;
     EditText tag_editT, color_editT;
     private ImageView imageView;
+
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
     public static final int RESULT_CANCELED = 0;
     public static final int RESULT_OK = -1;
+
     static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     static SecureRandom rnd = new SecureRandom();
 
@@ -88,44 +89,42 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                     break;
                 case R.id.button_save_photo:
                     //save picked photo to internal memory of app and/or use API
-
-                    System.out.println(tag_editT.getText());
-                    System.out.println(color_editT.getText()); //.toString());
-
-                    if(isEmpty(tag_editT) || isEmpty(color_editT)){  // uwzględnić kategorie tagów?
+                    if(isEmpty(tag_editT) || isEmpty(color_editT)){  // TODO uwzględnić kategorie tagów?
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
                         String picture = saveToInternalStorage(((BitmapDrawable)imageView.getDrawable()).getBitmap());
-                        System.out.println("SHOW MY DIR: " + picture);
 
-                        class SaveTask extends AsyncTask<Void, Void, Void> {
-
+                        class SaveToDB extends AsyncTask<Void, Void, Void>{
                             @Override
-                            protected Void doInBackground(Void... voids) {
-                                //adding new clothing
-                                WardrobeDB task = new WardrobeDB();
-                                task.setPath(picture);
-                                task.setTag(tag_editT.getText().toString());
-                                task.setColor(color_editT.getText().toString());
+                            protected Void doInBackground(Void... voids){
+                                //adding new element
+                                WardrobeDB new_elem = new WardrobeDB();
+                                new_elem.setPath(picture);
+                                new_elem.setTag(tag_editT.getText().toString());
+                                new_elem.setColor(color_editT.getText().toString());
 
-                                //adding to database
+                                //push to database
                                 ClientDB.getInstance(getContext()).getAppDatabase()
                                         .wardrobeDAO()
-                                        .insert(task);
+                                        .insert(new_elem);
                                 return null;
                             }
 
                             @Override
-                            protected void onPostExecute(Void aVoid) {
+                            protected void onPostExecute(Void aVoid){
                                 super.onPostExecute(aVoid);
-                                getActivity().finish();
-                                startActivity(new Intent(getContext(), MainActivity.class));
+                                //getActivity().finish(); //TODO chyba można to odpuścić
+                                //startActivity(new Intent(getContext(), MainActivity.class)); //TODO to też
+                                tag_editT.setText("");
+                                color_editT.setText("");
+                                tag_editT.clearFocus();
+                                color_editT.clearFocus();
                                 Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
                             }
                         }
-                        SaveTask st = new SaveTask();
-                        st.execute();
+                        SaveToDB save = new SaveToDB();
+                        save.execute();
                     }
                     break;
             }
@@ -134,16 +133,16 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
 
     private String saveToInternalStorage(Bitmap bitmapImage){
         ContextWrapper cw = new ContextWrapper(getContext());
-        // path to /data/data/yourapp/app_data/imageDir
 
+        //filename as a random alphanumeric string
         File directory = cw.getDir(randomString(20), Context.MODE_PRIVATE);
-        // Create imageDir
+        //create file
         File mypath = new File(directory,"profile.jpg");
 
         FileOutputStream fos = null;
         try{
             fos = new FileOutputStream(mypath);
-            // Use the compress method on the BitMap object to write image to the OutputStream
+            //use the compress method on the bitmap object to write image to the outputstream
             bitmapImage.compress(Bitmap.CompressFormat.PNG, 100, fos);
         }
         catch (Exception e){
@@ -158,11 +157,10 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         return directory.getAbsolutePath();
     }
 
-    boolean isEmpty(EditText text) {
+    boolean isEmpty(EditText text){
         CharSequence str = text.getText().toString();
         return TextUtils.isEmpty(str);
     }
-
 
     String randomString(int len){
         StringBuilder sb = new StringBuilder(len);
@@ -170,7 +168,6 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
             sb.append(AB.charAt(rnd.nextInt(AB.length())));
         return sb.toString();
     }
-
 
     public static boolean checkAndRequestPermissions(final Activity context){
         //check permissions
@@ -197,20 +194,20 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults){
-        // Handles permission result
+        //handles permission result
         if (requestCode == REQUEST_ID_MULTIPLE_PERMISSIONS){
             if (ContextCompat.checkSelfPermission(getContext(),
                     Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(getContext().getApplicationContext(),
-                          "Requires access to camera.", Toast.LENGTH_SHORT).show();
+                          "Wymagany jest dostęp do kamery", Toast.LENGTH_SHORT).show();
             }
             else if (ContextCompat.checkSelfPermission(getContext(),
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED){
                 Toast.makeText(getContext().getApplicationContext(),
-                          "Requires access to your storage.", Toast.LENGTH_SHORT).show();
+                          "Wymagany jest dostęp do plików", Toast.LENGTH_SHORT).show();
             }
             else{
-                System.out.println("Permission granted.");
+                System.out.println("Permission granted");
             }
         }
     }
@@ -219,7 +216,6 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode != RESULT_CANCELED){
-            System.out.println("DATA1: " + data);
             switch (requestCode){
                 case 0:
                     //camera
@@ -245,7 +241,6 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                     }
                     break;
             }
-            System.out.println("DATA2: " + data.getData());
         }
     }
 }
