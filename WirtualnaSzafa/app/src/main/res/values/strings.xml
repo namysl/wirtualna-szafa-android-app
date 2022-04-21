@@ -13,7 +13,7 @@
     <!-- placeholder texts in java files -->
     <string name="hello_blank_fragment">PLACEHOLDER TEXT</string>
 
-    <!-- TODO activity_main_drawer.xml & mobile_navigation.xml -->
+    <!-- TODO activity_main_drawer.xml & mobile_navigation.xml RANDOMIZE & COLLECTIONS -->
     <string name="menu_randomize">Przeglądaj wylosowane WIP</string>
     <string name="menu_collection">Zapisane zestawy WIP</string>
 

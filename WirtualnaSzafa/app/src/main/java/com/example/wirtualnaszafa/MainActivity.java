@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view){
                 Snackbar.make(view, "Work in progress", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                //TODO co to ma właściwie robić...
             }
         });
 

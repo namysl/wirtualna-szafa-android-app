@@ -15,10 +15,8 @@ public interface WardrobeDAO{
     List<WardrobeDB> getAll();
 
     @Query("SELECT * FROM WardrobeDB ORDER BY id DESC ")
-    List<WardrobeDB> getDesc();
+    List<WardrobeDB> getAllDesc();
 
-//    @Query("SELECT path FROM WardrobeDB")
-//    List<String> findPath();
     //TODO potrzebne sql query dla tagów i kolorów
 
     @Insert

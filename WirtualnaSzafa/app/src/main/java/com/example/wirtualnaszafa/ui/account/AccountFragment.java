@@ -91,9 +91,7 @@ public class AccountFragment extends Fragment implements View.OnClickListener{
                                 Response response = client.newCall(request).execute();
                                 System.out.println("RESPONSE: " + response.body().string());
                                 //tutaj się coś pierdoli z protokołem SSL
-
-
-
+                                //TODO account
 
 
 

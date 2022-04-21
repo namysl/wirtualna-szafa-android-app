@@ -41,7 +41,7 @@ public class GalleryFragment extends Fragment {
                         .getInstance(getContext())
                         .getAppDatabase()
                         .wardrobeDAO()
-                        .getDesc();  //first new elements
+                        .getAllDesc();  //first new elements
 
                 return list_elem;
             }
