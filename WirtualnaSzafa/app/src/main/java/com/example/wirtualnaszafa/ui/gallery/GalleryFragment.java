@@ -50,8 +50,8 @@ public class GalleryFragment extends Fragment {
             protected void onPostExecute(List<WardrobeDB> tasks) {
                 super.onPostExecute(tasks);
                 for(int i=0; i<tasks.size(); i++){
-                    WardrobeDB obj = tasks.get(i);
-                    System.out.println("ID: " + obj.getId()); //do usuwania elementu
+                    WardrobeDB obj = tasks.get(i); //obiekt, wykorzystywany też do usuwania wiersza
+                    System.out.println("ID: " + obj.getId());
                     System.out.println("PATH: " + obj.getPath());
                     System.out.println("TAG: " + obj.getTag());
                     System.out.println("COLOR: " + obj.getColor());
@@ -66,10 +66,11 @@ public class GalleryFragment extends Fragment {
                     tv_tag.setText(obj.getTag());
                     tv_color.setText(obj.getColor());
                     //dodać numerację?
-
+                    //może najnowsze zdjęcia na początku? descending order to będzie chyba
                     Button button_del = view.findViewById(R.id.button_delete);
-                    //TODO action listener -> usuwanie wybranego elementu, teraz już izi!
+
                     button_del.setOnClickListener(new View.OnClickListener() {
+                        //if clicked -> delete entry and change text on the button
                         public void onClick(View v) {
                             delete_entry(obj);
                             button_del.setText(R.string.deleted_from_db);

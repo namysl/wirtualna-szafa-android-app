@@ -93,6 +93,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
+                        //TODO czy usunąć z internalstorage po kliknięciu button delete
                         String picture = saveToInternalStorage(((BitmapDrawable)imageView.getDrawable()).getBitmap());
 
                         class SaveToDB extends AsyncTask<Void, Void, Void>{
