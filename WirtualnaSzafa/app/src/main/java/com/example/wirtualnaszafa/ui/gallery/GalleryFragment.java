@@ -47,36 +47,49 @@ public class GalleryFragment extends Fragment {
             }
 
             @Override
-            protected void onPostExecute(List<WardrobeDB> tasks) {
-                super.onPostExecute(tasks);
-                for(int i=0; i<tasks.size(); i++){
-                    WardrobeDB obj = tasks.get(i); //obiekt, wykorzystywany też do usuwania wiersza
-                    System.out.println("ID: " + obj.getId());
-                    System.out.println("PATH: " + obj.getPath());
-                    System.out.println("TAG: " + obj.getTag());
-                    System.out.println("COLOR: " + obj.getColor());
-
+            protected void onPostExecute(List<WardrobeDB> db) {
+                super.onPostExecute(db);
+                if (db.size() == 0){
                     View view = layoutInflater.inflate(R.layout.fragment_gallery_singleitem, linearLayout, false);
 
-                    ImageView imageView = view.findViewById(R.id.display_saved_img);
                     TextView tv_tag = view.findViewById(R.id.display_tag);
                     TextView tv_color = view.findViewById(R.id.display_color);
 
-                    loadImageFromStorage(obj.getPath(), imageView);
-                    tv_tag.setText(obj.getTag());
-                    tv_color.setText(obj.getColor());
-                    //dodać numerację?
-                    //może najnowsze zdjęcia na początku? descending order to będzie chyba
-                    Button button_del = view.findViewById(R.id.button_delete);
-
-                    button_del.setOnClickListener(new View.OnClickListener() {
-                        //if clicked -> delete entry and change text on the button
-                        public void onClick(View v) {
-                            delete_entry(obj);
-                            button_del.setText(R.string.deleted_from_db);
-                        }
-                    });
+                    tv_tag.setText("Galeria jest pusta,");
+                    tv_color.setText("dodaj nowy element");
+                    //TODO zrobić nowy fragment layout xml gdzie nie ma guzika, stringi do strings.xml
                     linearLayout.addView(view);
+                }
+                else{
+                    for (int i = 0; i < db.size(); i++) {
+                        WardrobeDB obj = db.get(i); //obiekt, wykorzystywany też do usuwania wiersza
+                        System.out.println("ID: " + obj.getId());
+                        System.out.println("PATH: " + obj.getPath());
+                        System.out.println("TAG: " + obj.getTag());
+                        System.out.println("COLOR: " + obj.getColor());
+
+                        View view = layoutInflater.inflate(R.layout.fragment_gallery_singleitem, linearLayout, false);
+
+                        ImageView imageView = view.findViewById(R.id.display_saved_img);
+                        TextView tv_tag = view.findViewById(R.id.display_tag);
+                        TextView tv_color = view.findViewById(R.id.display_color);
+
+                        loadImageFromStorage(obj.getPath(), imageView);
+                        tv_tag.setText(obj.getTag());
+                        tv_color.setText(obj.getColor());
+                        //dodać numerację?
+                        //może najnowsze zdjęcia na początku? descending order to będzie chyba
+                        Button button_del = view.findViewById(R.id.button_delete);
+
+                        button_del.setOnClickListener(new View.OnClickListener() {
+                            //if clicked -> delete entry and change text on the button
+                            public void onClick(View v) {
+                                delete_entry(obj);
+                                button_del.setText(R.string.deleted_from_db);
+                            }
+                        });
+                        linearLayout.addView(view);
+                    }
                 }
             }
         }
