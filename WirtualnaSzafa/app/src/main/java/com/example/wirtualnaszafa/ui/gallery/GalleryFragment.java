@@ -65,10 +65,16 @@ public class GalleryFragment extends Fragment {
                     loadImageFromStorage(obj.getPath(), imageView);
                     tv_tag.setText(obj.getTag());
                     tv_color.setText(obj.getColor());
+                    //dodać numerację?
 
                     Button button_del = view.findViewById(R.id.button_delete);
                     //TODO action listener -> usuwanie wybranego elementu, teraz już izi!
-
+                    button_del.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            delete_entry(obj);
+                            button_del.setText(R.string.deleted_from_db);
+                        }
+                    });
                     linearLayout.addView(view);
                 }
             }
@@ -89,5 +95,19 @@ public class GalleryFragment extends Fragment {
         catch (FileNotFoundException e){
             e.printStackTrace();
         }
+    }
+
+    private void delete_entry(final WardrobeDB task) {
+        class DeleteFromDB extends AsyncTask<Void, Void, Void> {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                ClientDB.getInstance(getContext()).getAppDatabase()
+                        .wardrobeDAO()
+                        .delete(task);
+                return null;
+            }
+        }
+        DeleteFromDB delete = new DeleteFromDB();
+        delete.execute();
     }
 }

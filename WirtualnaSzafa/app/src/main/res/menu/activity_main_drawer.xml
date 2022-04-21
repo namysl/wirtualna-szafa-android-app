@@ -18,10 +18,6 @@
             android:id="@+id/nav_add_element"
             android:icon="@drawable/ic_menu_add_element"
             android:title="@string/menu_add_element" />
-        <item
-            android:id="@+id/nav_remove_element"
-            android:icon="@drawable/ic_menu_remove_element"
-            android:title="@string/menu_remove_element"/>
     </group>
     <group
         android:id="@+id/menu_middle"

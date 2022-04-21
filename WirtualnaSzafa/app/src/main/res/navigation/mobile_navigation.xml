@@ -21,11 +21,6 @@
         android:label="@string/menu_add_element"
         tools:layout="@layout/fragment_add_element" />
     <fragment
-        android:id="@+id/nav_remove_element"
-        android:name="com.example.wirtualnaszafa.ui.remove_element.RemoveElementFragment"
-        android:label="@string/menu_remove_element"
-        tools:layout="@layout/fragment_remove_element" />
-    <fragment
         android:id="@+id/nav_randomize"
         android:name="com.example.wirtualnaszafa.ui.randomize.RandomizeFragment"
         android:label="@string/menu_randomize"

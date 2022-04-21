@@ -120,6 +120,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                                 color_editT.setText("");
                                 tag_editT.clearFocus();
                                 color_editT.clearFocus();
+                                imageView.setImageResource(R.drawable.ic_hanger);  //back to placeholder state
                                 Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
                             }
                         }

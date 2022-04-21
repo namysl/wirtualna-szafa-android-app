@@ -14,7 +14,6 @@
     <string name="hello_blank_fragment">PLACEHOLDER TEXT</string>
 
     <!-- TODO activity_main_drawer.xml & mobile_navigation.xml -->
-    <string name="menu_remove_element">Usuń element DO USUNIĘCIA</string>
     <string name="menu_randomize">Przeglądaj wylosowane WIP</string>
     <string name="menu_collection">Zapisane zestawy WIP</string>
 
@@ -24,6 +23,7 @@
     <!-- fragment_gallery -->
     <string name="menu_gallery">Galeria</string>
     <string name="button_gallery_delete">Usuń element</string>
+    <string name="deleted_from_db">Usunięto</string>
 
     <!-- fragment_add_element -->
     <string name="menu_add_element">Dodaj element</string>

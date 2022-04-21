@@ -43,7 +43,7 @@
     <EditText
         android:id="@+id/editText_tag_photo"
         android:layout_width="153dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:fontFamily="sans-serif-smallcaps"
         android:hint="@string/add_tag_placeholder"
         android:inputType="textVisiblePassword"
@@ -57,7 +57,7 @@
     <EditText
         android:id="@+id/editText_color_photo"
         android:layout_width="153dp"
-        android:layout_height="45dp"
+        android:layout_height="48dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="sans-serif-smallcaps"
         android:hint="@string/add_color_placeholer"
