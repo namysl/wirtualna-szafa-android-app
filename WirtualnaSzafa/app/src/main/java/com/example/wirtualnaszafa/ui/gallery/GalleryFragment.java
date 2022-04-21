@@ -41,7 +41,7 @@ public class GalleryFragment extends Fragment {
                         .getInstance(getContext())
                         .getAppDatabase()
                         .wardrobeDAO()
-                        .getAll();  //tutaj może być też inne query, ale tak jest wygodnie
+                        .getDesc();  //first new elements
 
                 return list_elem;
             }
@@ -50,19 +50,12 @@ public class GalleryFragment extends Fragment {
             protected void onPostExecute(List<WardrobeDB> db) {
                 super.onPostExecute(db);
                 if (db.size() == 0){
-                    View view = layoutInflater.inflate(R.layout.fragment_gallery_singleitem, linearLayout, false);
-
-                    TextView tv_tag = view.findViewById(R.id.display_tag);
-                    TextView tv_color = view.findViewById(R.id.display_color);
-
-                    tv_tag.setText("Galeria jest pusta,");
-                    tv_color.setText("dodaj nowy element");
-                    //TODO zrobić nowy fragment layout xml gdzie nie ma guzika, stringi do strings.xml
+                    View view = layoutInflater.inflate(R.layout.fragment_gallery_empty, linearLayout, false);
                     linearLayout.addView(view);
                 }
                 else{
                     for (int i = 0; i < db.size(); i++) {
-                        WardrobeDB obj = db.get(i); //obiekt, wykorzystywany też do usuwania wiersza
+                        WardrobeDB obj = db.get(i); //object, used to remove a row
                         System.out.println("ID: " + obj.getId());
                         System.out.println("PATH: " + obj.getPath());
                         System.out.println("TAG: " + obj.getTag());
@@ -77,8 +70,8 @@ public class GalleryFragment extends Fragment {
                         loadImageFromStorage(obj.getPath(), imageView);
                         tv_tag.setText(obj.getTag());
                         tv_color.setText(obj.getColor());
-                        //dodać numerację?
-                        //może najnowsze zdjęcia na początku? descending order to będzie chyba
+                        //TODO teraz te pola wydają mi się głupie xD lepiej chyba zrobić query i filtrowanie
+
                         Button button_del = view.findViewById(R.id.button_delete);
 
                         button_del.setOnClickListener(new View.OnClickListener() {
@@ -93,7 +86,6 @@ public class GalleryFragment extends Fragment {
                 }
             }
         }
-
         LoadFromDB load = new LoadFromDB();
         load.execute();
 

@@ -89,11 +89,11 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                     break;
                 case R.id.button_save_photo:
                     //save picked photo to internal memory of app and/or use API
-                    if(isEmpty(tag_editT) || isEmpty(color_editT)){  // TODO uwzględnić kategorie tagów?
+                    if(isEmpty(tag_editT) || isEmpty(color_editT)){  // TODO uwzględnić kategorie tagów i kolorów?
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        //TODO czy usunąć z internalstorage po kliknięciu button delete
+                        //TODO czy usunąć z internalstorage po kliknięciu button delete?
                         String picture = saveToInternalStorage(((BitmapDrawable)imageView.getDrawable()).getBitmap());
 
                         class SaveToDB extends AsyncTask<Void, Void, Void>{
@@ -115,8 +115,8 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                             @Override
                             protected void onPostExecute(Void aVoid){
                                 super.onPostExecute(aVoid);
-                                //getActivity().finish(); //TODO chyba można to odpuścić
-                                //startActivity(new Intent(getContext(), MainActivity.class)); //TODO to też
+                                //getActivity().finish(); //closes fragment
+                                //startActivity(new Intent(getContext(), MainActivity.class)); moves to homepage
                                 tag_editT.setText("");
                                 color_editT.setText("");
                                 tag_editT.clearFocus();
