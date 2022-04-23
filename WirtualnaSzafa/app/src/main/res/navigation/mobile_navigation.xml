@@ -23,7 +23,7 @@
     <fragment
         android:id="@+id/nav_randomize"
         android:name="com.example.wirtualnaszafa.ui.randomize.RandomizeFragment"
-        android:label="@string/menu_randomize"
+        android:label="@string/nav_randomize"
         tools:layout="@layout/fragment_randomize" />
     <fragment
         android:id="@+id/nav_collections"

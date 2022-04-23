@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.randomize.RandomizeFragment">
 
-    <!-- TODO: xml randomize -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/imageView_accessory"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:src="@drawable/ic_hanger"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_shoes"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_top" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/imageView_top"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:src="@drawable/ic_hanger"
+        app:layout_constraintEnd_toStartOf="@+id/imageView_bot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_bot"
+        android:layout_width="150dp"
+        android:layout_height="250dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/ic_hanger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_shoes"
+        android:layout_width="150dp"
+        android:layout_height="200dp"
+        android:layout_marginEnd="40dp"
+        android:src="@drawable/ic_hanger"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_bot" />
+
+    <Button
+        android:id="@+id/button_new_random"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="468dp"
+        android:text="@string/new_random"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/button_save_random"
+        android:layout_width="170dp"
+        android:layout_height="50dp"
+        android:text="@string/save_random"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_new_random"
+        app:layout_constraintVertical_bias="0.116" />
+</androidx.constraintlayout.widget.ConstraintLayout>

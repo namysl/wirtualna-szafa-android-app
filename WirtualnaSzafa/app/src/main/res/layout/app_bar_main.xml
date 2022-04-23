@@ -22,6 +22,7 @@
 
     <include layout="@layout/content_main" />
 
+    <!-- TODO wywalic kolko albo cos z nim w koncu zrobić -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

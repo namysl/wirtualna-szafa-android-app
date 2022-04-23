@@ -1,4 +1,4 @@
-package com.example.wirtualnaszafa;
+package com.example.wirtualnaszafa.db;
 
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;

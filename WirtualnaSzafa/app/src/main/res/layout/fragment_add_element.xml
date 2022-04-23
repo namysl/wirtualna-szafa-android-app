@@ -40,6 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/button_add_from_camera"
         app:layout_constraintVertical_bias="0.375" />
 
+
     <EditText
         android:id="@+id/editText_tag_photo"
         android:layout_width="153dp"
@@ -54,6 +55,19 @@
         app:layout_constraintEnd_toStartOf="@+id/editText_color_photo"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <Spinner
+        android:id="@+id/spinner_tag"
+        android:layout_width="177dp"
+        android:layout_height="47dp"
+        android:layout_marginStart="36dp"
+        android:autofillHints="@string/add_tag_placeholder"
+        android:contentDescription="@string/add_tag_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_add_photo"
+        app:layout_constraintVertical_bias="1.0" />
+
+
     <EditText
         android:id="@+id/editText_color_photo"
         android:layout_width="153dp"
@@ -66,7 +80,9 @@
         android:textSize="24sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.918"
+        app:layout_constraintStart_toEndOf="@+id/spinner_tag" />
 
     <ImageView
         android:id="@+id/imageView_add_photo"

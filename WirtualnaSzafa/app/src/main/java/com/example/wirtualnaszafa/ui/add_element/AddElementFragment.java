@@ -17,9 +17,12 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -27,9 +30,9 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
-import com.example.wirtualnaszafa.ClientDB;
 import com.example.wirtualnaszafa.R;
-import com.example.wirtualnaszafa.WardrobeDB;
+import com.example.wirtualnaszafa.db.ClientDB;
+import com.example.wirtualnaszafa.db.WardrobeDB;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -41,6 +44,7 @@ import java.util.List;
 public class AddElementFragment extends Fragment implements View.OnClickListener{
     Button button_gallery, button_camera, button_save;
     EditText tag_editT, color_editT;
+    Spinner spinner;
     private ImageView imageView;
 
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
@@ -61,6 +65,34 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
 
         tag_editT = rootView.findViewById(R.id.editText_tag_photo);
         color_editT = rootView.findViewById(R.id.editText_color_photo);
+
+
+
+        //TODO SPINNER
+        spinner = (Spinner) rootView.findViewById(R.id.spinner_tag);
+
+        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(
+                rootView.getContext(),
+                R.array.add_tag, //array of strings
+                R.layout.spinner_text); //layout
+
+        //layout of the spinner
+        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(staticAdapter);
+        spinner.setSelection(0, false);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                tag_editT.setText((String) parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                System.out.println("nothing selected yet");
+            }
+        });
 
         button_gallery.setOnClickListener(this);
         button_camera.setOnClickListener(this);
@@ -89,44 +121,50 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                     break;
                 case R.id.button_save_photo:
                     //save picked photo to internal memory of app and/or use API
-                    if(isEmpty(tag_editT) || isEmpty(color_editT)){  // TODO uwzględnić kategorie tagów i kolorów?
+                    if(isEmpty(tag_editT) || isEmpty(color_editT)){  //uwzględniono tagi, TODO kolory
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        //TODO czy usunąć z internalstorage po kliknięciu button delete?
-                        String picture = saveToInternalStorage(((BitmapDrawable)imageView.getDrawable()).getBitmap());
+                        //to be sure user is not stupid and added a picture :)
+                        try {
+                            String picture = saveToInternalStorage(((BitmapDrawable) imageView.getDrawable()).getBitmap());
 
-                        class SaveToDB extends AsyncTask<Void, Void, Void>{
-                            @Override
-                            protected Void doInBackground(Void... voids){
-                                //adding new element
-                                WardrobeDB new_elem = new WardrobeDB();
-                                new_elem.setPath(picture);
-                                new_elem.setTag(tag_editT.getText().toString());
-                                new_elem.setColor(color_editT.getText().toString());
+                            class SaveToDB extends AsyncTask<Void, Void, Void>{
+                                @Override
+                                protected Void doInBackground(Void... voids){
+                                    //adding new element
+                                    WardrobeDB new_elem = new WardrobeDB();
+                                    new_elem.setPath(picture);
+                                    new_elem.setTag(tag_editT.getText().toString());
+                                    new_elem.setColor(color_editT.getText().toString());
 
-                                //push to database
-                                ClientDB.getInstance(getContext()).getAppDatabase()
-                                        .wardrobeDAO()
-                                        .insert(new_elem);
-                                return null;
+                                    //push to database
+                                    ClientDB.getInstance(getContext()).getAppDatabase()
+                                            .wardrobeDAO()
+                                            .insert(new_elem);
+                                    return null;
+                                }
+
+                                @Override
+                                protected void onPostExecute(Void aVoid){
+                                    super.onPostExecute(aVoid);
+                                    //getActivity().finish(); //closes fragment
+                                    //startActivity(new Intent(getContext(), MainActivity.class)); //moves to homepage
+                                    spinner.setSelection(0, false);
+                                    tag_editT.setText("");
+                                    color_editT.setText("");
+                                    tag_editT.clearFocus();
+                                    color_editT.clearFocus();
+                                    imageView.setImageResource(R.drawable.ic_hanger);  //back to placeholder state
+                                    Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
+                                }
                             }
+                            SaveToDB save = new SaveToDB();
+                            save.execute();
 
-                            @Override
-                            protected void onPostExecute(Void aVoid){
-                                super.onPostExecute(aVoid);
-                                //getActivity().finish(); //closes fragment
-                                //startActivity(new Intent(getContext(), MainActivity.class)); moves to homepage
-                                tag_editT.setText("");
-                                color_editT.setText("");
-                                tag_editT.clearFocus();
-                                color_editT.clearFocus();
-                                imageView.setImageResource(R.drawable.ic_hanger);  //back to placeholder state
-                                Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
-                            }
+                        }catch (Exception e){
+                            Toast.makeText(v.getContext(), "Należy dodać zdjęcie", Toast.LENGTH_SHORT).show();
                         }
-                        SaveToDB save = new SaveToDB();
-                        save.execute();
                     }
                     break;
             }

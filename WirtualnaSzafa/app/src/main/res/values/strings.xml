@@ -13,8 +13,7 @@
     <!-- placeholder texts in java files -->
     <string name="hello_blank_fragment">PLACEHOLDER TEXT</string>
 
-    <!-- TODO activity_main_drawer.xml & mobile_navigation.xml RANDOMIZE & COLLECTIONS -->
-    <string name="menu_randomize">Przeglądaj wylosowane WIP</string>
+    <!-- TODO activity_main_drawer.xml & mobile_navigation.xml COLLECTIONS -->
     <string name="menu_collection">Zapisane zestawy WIP</string>
 
     <!-- fragment_main & MainActivity -->
@@ -35,6 +34,19 @@
     <string name="add_tag_placeholder">TAG</string>
     <string name="add_color_placeholer">KOLOR</string>
     <string name="add_photoimgview">Dodane zdjęcie</string>
+
+    <string-array name="add_tag">
+        <item>buty</item>
+        <item>góra</item>
+        <item>dół</item>
+        <item>akcesoria</item>
+    </string-array>
+
+    <!-- fragment_randomize -->
+    <string name="menu_randomize">Losuj zestaw</string>
+    <string name="nav_randomize">Wylosowany zestaw</string>
+    <string name="new_random">Losuj ponownie</string>
+    <string name="save_random">Zapisz zestaw</string>
 
     <!-- fragment_account -->
     <string name="menu_account">Twoje konto</string>

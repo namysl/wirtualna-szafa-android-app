@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        //save theme for entire app
+        //save dark/light theme for entire app
         SharedPreferences sharedPreferences = getSharedPreferences("sharedPrefs", MODE_PRIVATE);
         final boolean isDarkModeOn = sharedPreferences.getBoolean("isDarkModeOn", false);
 

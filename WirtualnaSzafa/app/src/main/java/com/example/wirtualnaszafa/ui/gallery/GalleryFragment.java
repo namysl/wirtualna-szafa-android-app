@@ -14,9 +14,9 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.wirtualnaszafa.ClientDB;
+import com.example.wirtualnaszafa.db.ClientDB;
 import com.example.wirtualnaszafa.R;
-import com.example.wirtualnaszafa.WardrobeDB;
+import com.example.wirtualnaszafa.db.WardrobeDB;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -56,10 +56,10 @@ public class GalleryFragment extends Fragment {
                 else{
                     for (int i = 0; i < db.size(); i++) {
                         WardrobeDB obj = db.get(i); //object, used to remove a row
-                        System.out.println("ID: " + obj.getId());
-                        System.out.println("PATH: " + obj.getPath());
-                        System.out.println("TAG: " + obj.getTag());
-                        System.out.println("COLOR: " + obj.getColor());
+//                        System.out.println("ID: " + obj.getId());
+//                        System.out.println("PATH: " + obj.getPath());
+//                        System.out.println("TAG: " + obj.getTag());
+//                        System.out.println("COLOR: " + obj.getColor());
 
                         View view = layoutInflater.inflate(R.layout.fragment_gallery_singleitem, linearLayout, false);
 
@@ -107,6 +107,7 @@ public class GalleryFragment extends Fragment {
         class DeleteFromDB extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
+                //TODO czy usunąć z internalstorage po kliknięciu button delete?
                 ClientDB.getInstance(getContext()).getAppDatabase()
                         .wardrobeDAO()
                         .delete(task);
