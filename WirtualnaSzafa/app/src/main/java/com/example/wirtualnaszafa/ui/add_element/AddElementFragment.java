@@ -74,10 +74,9 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                 R.layout.spinner_text); //layout
 
         staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
         spinner.setAdapter(staticAdapter);
 
-        spinner.setSelection(4, true);  //fancy, but irritating, hmmmm
+        spinner.setSelection(4, true); //it's a very stupid solution, but it works!
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -117,7 +116,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                     startActivityForResult(takePicture, 0);
                     break;
                 case R.id.button_save_photo:
-                    //save picked photo to internal memory of app and/or use API
+                    //save picked photo to internal memory of the app
                     if(isEmpty(tag_editT) || isEmpty(color_editT)){  //uwzględniono tagi, TODO kolory
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }

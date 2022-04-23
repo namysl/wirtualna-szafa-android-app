@@ -68,9 +68,12 @@ public class GalleryFragment extends Fragment {
                         TextView tv_color = view.findViewById(R.id.display_color);
 
                         loadImageFromInternalStorage(obj.getPath(), imageView);
-                        tv_tag.setText(obj.getTag());
-                        tv_color.setText(obj.getColor());
-                        //TODO query+filtrowanie albo zrobić porządek z tymi brzydkimi stringami
+
+                        String tag = getResources().getString(R.string.tag, obj.getTag());
+                        tv_tag.setText(tag);
+                        String color = getResources().getString(R.string.color, obj.getColor());
+                        tv_color.setText(color);
+                        //TODO query+filtrowanie
 
                         Button button_del = view.findViewById(R.id.button_delete);
 
@@ -81,6 +84,8 @@ public class GalleryFragment extends Fragment {
                                 deleteEntryInDB(obj);
                                 deleteImageFromInternalStorage(obj.getPath());
                                 imageView.setImageResource(R.drawable.ic_hanger);
+                                tv_tag.setText("");
+                                tv_color.setText("");
                                 button_del.setText(R.string.deleted_from_db);
                             }
                         });

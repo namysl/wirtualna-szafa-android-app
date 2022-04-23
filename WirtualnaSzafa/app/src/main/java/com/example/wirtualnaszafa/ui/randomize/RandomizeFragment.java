@@ -58,19 +58,18 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
 
                 WardrobeDAO dao = ClientDB.getInstance(getContext()).getAppDatabase().wardrobeDAO();
 
-                final String tags[] = {"góra", "dół", "akcesoria", "buty"};
+                final String[] tags = {"góra", "dół", "akcesoria", "buty"};
                 final ArrayList[] arrays = {clothes_top, clothes_bot, clothes_accesories, clothes_shoes};
 
                 for (int i = 0; i < tags.length; i++) {
                     List<WardrobeDB> lista_tags = dao.getClothesByTag(tags[i]);
-                    System.out.println("LISTA TAGS: " + lista_tags);
+                    System.out.println("LISTA DAO: " + lista_tags);
                     for (int j = 0; j < lista_tags.size(); j++) {
                         arrays[i].add(lista_tags.get(j));
                     }
                 }
 
-                List<WardrobeDB> db = dao.getAll();
-                return db;
+                return dao.getAll();
             }
 
             @Override

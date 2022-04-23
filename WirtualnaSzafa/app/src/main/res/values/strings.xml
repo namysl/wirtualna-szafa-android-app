@@ -24,6 +24,8 @@
     <string name="button_gallery_delete">Usuń element</string>
     <string name="deleted_from_db">Usunięto</string>
     <string name="empty_gallery">Galeria jest pusta,\nużyj <i>Dodaj element</i></string>
+    <string name="tag">TAG: %1$s</string>
+    <string name="color">KOLOR: %1$s</string>
 
     <!-- fragment_add_element -->
     <string name="menu_add_element">Dodaj element</string>
