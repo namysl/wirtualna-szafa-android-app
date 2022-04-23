@@ -55,7 +55,7 @@ public class GalleryFragment extends Fragment {
                 }
                 else{
                     for (int i = 0; i < db.size(); i++) {
-                        WardrobeDB obj = db.get(i); //object, used to remove a row
+                        WardrobeDB obj = db.get(i); //object, used to remove a row too
 //                        System.out.println("ID: " + obj.getId());
 //                        System.out.println("PATH: " + obj.getPath());
 //                        System.out.println("TAG: " + obj.getTag());
@@ -70,14 +70,15 @@ public class GalleryFragment extends Fragment {
                         loadImageFromStorage(obj.getPath(), imageView);
                         tv_tag.setText(obj.getTag());
                         tv_color.setText(obj.getColor());
-                        //TODO teraz te pola wydają mi się głupie xD lepiej chyba zrobić query i filtrowanie
+                        //TODO query+filtrowanie albo zrobić porządek z tymi brzydkimi stringami
 
                         Button button_del = view.findViewById(R.id.button_delete);
 
                         button_del.setOnClickListener(new View.OnClickListener() {
                             //if clicked -> delete entry and change text on the button
                             public void onClick(View v) {
-                                delete_entry(obj);
+                                deleteEntryInDB(obj);
+                                deleteImageFromStorage(obj.getPath());
                                 button_del.setText(R.string.deleted_from_db);
                             }
                         });
@@ -103,7 +104,12 @@ public class GalleryFragment extends Fragment {
         }
     }
 
-    private void delete_entry(final WardrobeDB task) {
+    private boolean deleteImageFromStorage(String path){
+        File f = new File(path, "profile.jpg");
+        return f.delete();
+    }
+
+    private void deleteEntryInDB(final WardrobeDB task) {
         class DeleteFromDB extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
