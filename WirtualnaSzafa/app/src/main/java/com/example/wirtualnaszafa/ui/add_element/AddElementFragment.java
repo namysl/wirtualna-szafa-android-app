@@ -66,9 +66,6 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         tag_editT = rootView.findViewById(R.id.editText_tag_photo);
         color_editT = rootView.findViewById(R.id.editText_color_photo);
 
-
-
-        //TODO SPINNER
         spinner = (Spinner) rootView.findViewById(R.id.spinner_tag);
 
         ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(
@@ -76,11 +73,11 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                 R.array.add_tag, //array of strings
                 R.layout.spinner_text); //layout
 
-        //layout of the spinner
         staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(staticAdapter);
-        spinner.setSelection(0, false);
+
+        //spinner.setSelection(0, false);  //fancy, but irritating, hmmmm
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -125,7 +122,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        //to be sure user is not stupid and added a picture :)
+                        //to be sure that user is not stupid and added a picture :)
                         try {
                             String picture = saveToInternalStorage(((BitmapDrawable) imageView.getDrawable()).getBitmap());
 
@@ -139,7 +136,8 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                                     new_elem.setColor(color_editT.getText().toString());
 
                                     //push to database
-                                    ClientDB.getInstance(getContext()).getAppDatabase()
+                                    ClientDB.getInstance(getContext())
+                                            .getAppDatabase()
                                             .wardrobeDAO()
                                             .insert(new_elem);
                                     return null;
@@ -150,7 +148,6 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                                     super.onPostExecute(aVoid);
                                     //getActivity().finish(); //closes fragment
                                     //startActivity(new Intent(getContext(), MainActivity.class)); //moves to homepage
-                                    spinner.setSelection(0, false);
                                     tag_editT.setText("");
                                     color_editT.setText("");
                                     tag_editT.clearFocus();
