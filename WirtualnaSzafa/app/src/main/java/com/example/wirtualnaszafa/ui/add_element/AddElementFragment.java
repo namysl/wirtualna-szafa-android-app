@@ -77,7 +77,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         // Apply the adapter to the spinner
         spinner.setAdapter(staticAdapter);
 
-        //spinner.setSelection(0, false);  //fancy, but irritating, hmmmm
+        spinner.setSelection(4, true);  //fancy, but irritating, hmmmm
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -152,6 +152,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                                     color_editT.setText("");
                                     tag_editT.clearFocus();
                                     color_editT.clearFocus();
+                                    spinner.setSelection(4, true);
                                     imageView.setImageResource(R.drawable.ic_hanger);  //back to placeholder state
                                     Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
                                 }

@@ -67,7 +67,7 @@ public class GalleryFragment extends Fragment {
                         TextView tv_tag = view.findViewById(R.id.display_tag);
                         TextView tv_color = view.findViewById(R.id.display_color);
 
-                        loadImageFromStorage(obj.getPath(), imageView);
+                        loadImageFromInternalStorage(obj.getPath(), imageView);
                         tv_tag.setText(obj.getTag());
                         tv_color.setText(obj.getColor());
                         //TODO query+filtrowanie albo zrobić porządek z tymi brzydkimi stringami
@@ -75,10 +75,12 @@ public class GalleryFragment extends Fragment {
                         Button button_del = view.findViewById(R.id.button_delete);
 
                         button_del.setOnClickListener(new View.OnClickListener() {
-                            //if clicked -> delete entry and change text on the button
+                            //delete entry in internal memory & DB
+                            //change text on the button and display placeholder
                             public void onClick(View v) {
                                 deleteEntryInDB(obj);
-                                deleteImageFromStorage(obj.getPath());
+                                deleteImageFromInternalStorage(obj.getPath());
+                                imageView.setImageResource(R.drawable.ic_hanger);
                                 button_del.setText(R.string.deleted_from_db);
                             }
                         });
@@ -93,7 +95,7 @@ public class GalleryFragment extends Fragment {
         return rootView;
     }
 
-    private void loadImageFromStorage(String path, ImageView img){
+    private void loadImageFromInternalStorage(String path, ImageView img){
         try{
             File f = new File(path, "profile.jpg");
             Bitmap b = BitmapFactory.decodeStream(new FileInputStream(f));
@@ -104,7 +106,7 @@ public class GalleryFragment extends Fragment {
         }
     }
 
-    private boolean deleteImageFromStorage(String path){
+    private boolean deleteImageFromInternalStorage(String path){
         File f = new File(path, "profile.jpg");
         return f.delete();
     }
@@ -113,7 +115,6 @@ public class GalleryFragment extends Fragment {
         class DeleteFromDB extends AsyncTask<Void, Void, Void> {
             @Override
             protected Void doInBackground(Void... voids) {
-                //TODO czy usunąć z internalstorage po kliknięciu button delete?
                 ClientDB.getInstance(getContext()).getAppDatabase()
                         .wardrobeDAO()
                         .delete(task);
