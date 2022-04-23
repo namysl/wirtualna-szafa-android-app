@@ -24,7 +24,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class RandomizeFragment extends Fragment implements View.OnClickListener{
     //TODO RANDOMIZE
@@ -36,12 +38,18 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
     List<WardrobeDB> clothes_accesories = new ArrayList<>();
     List<WardrobeDB> clothes_shoes = new ArrayList<>();
 
+    final String[] tags = {"góra", "dół", "akcesoria", "buty"};
+    final List[] arrays = {clothes_top, clothes_bot, clothes_accesories, clothes_shoes};
+
     List<List<WardrobeDB>> cartesian_product;
+    int cartesian_product_size;
+
+    List <Integer> displayed = new ArrayList<>();
+    List <Integer> not_displayed = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_randomize, container, false);
 
         iv_top = rootView.findViewById(R.id.imageView_top);
@@ -59,16 +67,11 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
             @Override
             protected List<WardrobeDB> doInBackground(Void... voids) {
                 //retrieve data from DB by tag and save it into the array
-
                 WardrobeDAO dao = ClientDB.getInstance(getContext()).getAppDatabase().wardrobeDAO();
 
-                final String[] tags = {"góra", "dół", "akcesoria", "buty"};
-                final List[] arrays = {clothes_top, clothes_bot, clothes_accesories, clothes_shoes};
-
-                for (int i = 0; i < tags.length; i++) {
+                for(int i=0; i < tags.length; i++){
                     List<WardrobeDB> lista_tags = dao.getClothesByTag(tags[i]);
-                    System.out.println("LISTA DAO: " + lista_tags);
-                    for (int j = 0; j < lista_tags.size(); j++) {
+                    for (int j=0; j < lista_tags.size(); j++){
                         arrays[i].add(lista_tags.get(j));
                     }
                 }
@@ -84,11 +87,11 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                 int size_accesories = clothes_accesories.size();
                 int size_shoes = clothes_shoes.size();
 
-                if (db.size() == 0) {
+                if(db.size() == 0){
                     Toast.makeText(rootView.getContext(), "Galeria aplikacji jest pusta," +
                             "                                   \ndodaj nowe elementy", Toast.LENGTH_LONG).show();
                 }
-                else if (size_top == 0 || size_bot == 0 || size_accesories == 0 || size_shoes == 0) {
+                else if(size_top == 0 || size_bot == 0 || size_accesories == 0 || size_shoes == 0) {
                     String empty_tag;
 
                     if(size_top == 0){
@@ -109,32 +112,32 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     Toast.makeText(rootView.getContext(), empty_tag_to_toast, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    System.out.println("top: " + clothes_top.size());
-                    System.out.println("bot: " + clothes_bot.size());
-                    System.out.println("accessory: " + clothes_accesories.size());
-                    System.out.println("shoes: " + clothes_shoes.size());
+                    System.out.println("¯\\_(ツ)_/¯  TOP: " + clothes_top.size() +
+                                       " BOT: " + clothes_bot.size() +
+                                       " ACCESORIES: " + clothes_accesories.size() +
+                                       " SHOES: " + clothes_shoes.size() + " ¯\\_(ツ)_/¯");
 
-                    //Guava library
+                    //Guava library, cartesian product
                     cartesian_product = Lists.cartesianProduct(clothes_top,
                                                                clothes_bot,
                                                                clothes_accesories,
                                                                clothes_shoes);
-                    System.out.println(cartesian_product);
+
+                    cartesian_product_size = cartesian_product.size();
                     System.out.println("SIZE OF CARTESIAN: " + cartesian_product.size());
 
-                    for (int i = 0; i < clothes_shoes.size(); i++) {
-                        //WardrobeDB obj = db.get(i); //object, used to remove a row
-//                        System.out.println("ID: " + obj.getId());
-//                        System.out.println("PATH: " + obj.getPath());
-//                        System.out.println("TAG: " + obj.getTag());
-//                        System.out.println("COLOR: " + obj.getColor());
-                        System.out.println("BUUUUUTY:" + clothes_shoes.get(i).getColor());
-                    }
+                    Random rand = new Random();
+                    int rnd = rand.nextInt(cartesian_product_size);
+                    System.out.println("RND: " + rnd);
 
-                    loadImageFromStorage(clothes_top.get(0).getPath(), iv_top);
-                    loadImageFromStorage(clothes_bot.get(0).getPath(), iv_bot);
-                    loadImageFromStorage(clothes_accesories.get(0).getPath(), iv_accesories);
-                    loadImageFromStorage(clothes_shoes.get(0).getPath(), iv_shoes);
+                    loadImageFromStorage(cartesian_product.get(rnd).get(0).getPath(), iv_top);
+                    loadImageFromStorage(cartesian_product.get(rnd).get(1).getPath(), iv_bot);
+                    loadImageFromStorage(cartesian_product.get(rnd).get(2).getPath(), iv_accesories);
+                    loadImageFromStorage(cartesian_product.get(rnd).get(3).getPath(), iv_shoes);
+
+                    displayed.add(rnd);
+                    populate_and_shuffle_list(not_displayed, rnd);
+                    System.out.println("START: " + displayed + ", " + not_displayed);
                 }
             }
         }
@@ -142,6 +145,17 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
         load.execute();
 
         return rootView;
+    }
+
+    private List<Integer> populate_and_shuffle_list(List <Integer> list_to_populate, int picked_random){
+        for(int i=0; i<cartesian_product_size; i++){
+            list_to_populate.add(i);
+        }
+
+        list_to_populate.remove(picked_random);
+        Collections.shuffle(list_to_populate);
+
+        return list_to_populate;
     }
 
     private void loadImageFromStorage(String path, ImageView img){
@@ -160,15 +174,44 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_new_random:
-                Toast.makeText(v.getContext(), "NEW", Toast.LENGTH_SHORT).show();
+                if(not_displayed.size() == 0){
+                    Toast.makeText(v.getContext(), "Wyświetlono wszystkie możliwe kombinacje, zestawy pokazywane są od początku", Toast.LENGTH_SHORT).show();
+                    System.out.println("OD NOWAAA");
+                    System.out.println("IF PRZED: " + displayed + ", " + not_displayed);
+                    Random rand = new Random();
+                    int rnd = rand.nextInt(cartesian_product_size);
+                    System.out.println("RND: " + rnd);
 
-                for (int i = 0; i < clothes_top.size(); i++) {
-                    System.out.println("TOP:" + clothes_top.get(i).getColor());
+                    displayed.clear();
+                    not_displayed.clear();
+                    populate_and_shuffle_list(not_displayed, rnd);
+
+                    loadImageFromStorage(cartesian_product.get(rnd).get(0).getPath(), iv_top);
+                    loadImageFromStorage(cartesian_product.get(rnd).get(1).getPath(), iv_bot);
+                    loadImageFromStorage(cartesian_product.get(rnd).get(2).getPath(), iv_accesories);
+                    loadImageFromStorage(cartesian_product.get(rnd).get(3).getPath(), iv_shoes);
+                    displayed.add(rnd);
+
+                    System.out.println("IF PO: " + displayed + ", " + not_displayed + "rnd: " + rnd);
                 }
+                else {
+                    loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(0).getPath(), iv_top);
+                    loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(1).getPath(), iv_bot);
+                    loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(2).getPath(), iv_accesories);
+                    loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(3).getPath(), iv_shoes);
 
+                    System.out.println("ELSE PRZED " + displayed + ", " + not_displayed);
+
+                    displayed.add(not_displayed.get(0));
+                    not_displayed.remove(not_displayed.get(0));
+
+                    System.out.println("ELSE PO " + displayed + ", " + not_displayed);
+                }
                 break;
+
             case R.id.button_save_random:
-                Toast.makeText(v.getContext(), "SAVE", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Zestaw został zapisany", Toast.LENGTH_SHORT).show();
+                //TODO button_save_random mega izi
                 break;
         }
     }
