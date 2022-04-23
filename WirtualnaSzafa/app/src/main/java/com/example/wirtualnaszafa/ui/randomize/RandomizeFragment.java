@@ -18,21 +18,23 @@ import com.example.wirtualnaszafa.R;
 import com.example.wirtualnaszafa.db.ClientDB;
 import com.example.wirtualnaszafa.db.WardrobeDAO;
 import com.example.wirtualnaszafa.db.WardrobeDB;
+import com.google.common.collect.Lists;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RandomizeFragment extends Fragment implements View.OnClickListener{
     //TODO RANDOMIZE
     ImageView iv_top, iv_bot, iv_accesory, iv_shoes;
     Button button_new_random, button_save_random;
-    ArrayList<WardrobeDB> clothes_top = new ArrayList<>();
-    ArrayList<WardrobeDB> clothes_bot = new ArrayList<>();
-    ArrayList<WardrobeDB> clothes_accesories = new ArrayList<>();
-    ArrayList<WardrobeDB> clothes_shoes = new ArrayList<>();
+    List<WardrobeDB> clothes_top = new ArrayList<>();
+    List<WardrobeDB> clothes_bot = new ArrayList<>();
+    List<WardrobeDB> clothes_accesories = new ArrayList<>();
+    List<WardrobeDB> clothes_shoes = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -59,7 +61,7 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                 WardrobeDAO dao = ClientDB.getInstance(getContext()).getAppDatabase().wardrobeDAO();
 
                 final String[] tags = {"góra", "dół", "akcesoria", "buty"};
-                final ArrayList[] arrays = {clothes_top, clothes_bot, clothes_accesories, clothes_shoes};
+                final List[] arrays = {clothes_top, clothes_bot, clothes_accesories, clothes_shoes};
 
                 for (int i = 0; i < tags.length; i++) {
                     List<WardrobeDB> lista_tags = dao.getClothesByTag(tags[i]);
@@ -89,23 +91,31 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                         System.out.println("BUUUUUTY:" + clothes_shoes.get(i).getColor());
                     }
                 }
+
                 loadImageFromStorage(clothes_shoes.get(1).getPath(), iv_shoes);
                 loadImageFromStorage(clothes_shoes.get(2).getPath(), iv_top);
                 loadImageFromStorage(clothes_shoes.get(0).getPath(), iv_bot);
+
+                List<Object> list1 = Arrays.asList("a", "b", "c");
+                List<Object> list2 = Arrays.asList("d", "e");
+                List<Object> list3 = Arrays.asList("1", "2");
+                List<Object> list4 = Arrays.asList("*", "?");
+
+                List<List<Object>> nowa = Lists.cartesianProduct(list1, list2, list3, list4);
+                System.out.println("nowa cartesian" + nowa);
+
+                List<List<WardrobeDB>> cartesian = Lists.cartesianProduct(clothes_top,
+                                                                          clothes_bot,
+                                                                          clothes_accesories,
+                                                                          clothes_shoes);
+                System.out.println(cartesian);
+                System.out.println("SIZE OF CARTESIAN: " + cartesian.size());
+
             }
         }
         LoadFromDB load = new LoadFromDB();
         load.execute();
 
-        for (int i = 0; i < clothes_shoes.size(); i++) {
-            //WardrobeDB obj = db.get(i); //object, used to remove a row
-//                        System.out.println("ID: " + obj.getId());
-//                        System.out.println("PATH: " + obj.getPath());
-//                        System.out.println("TAG: " + obj.getTag());
-//                        System.out.println("COLOR: " + obj.getColor());
-            System.out.print("BUUUUUTY:" + clothes_shoes.get(i).getColor());
-
-        }
         return rootView;
     }
 
@@ -119,12 +129,18 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
             e.printStackTrace();
         }
     }
+
     @SuppressLint("NonConstantResourceId")
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.button_new_random:
                 Toast.makeText(v.getContext(), "NEW", Toast.LENGTH_SHORT).show();
+
+                for (int i = 0; i < clothes_top.size(); i++) {
+                    System.out.println("TOP:" + clothes_top.get(i).getColor());
+                }
+
                 break;
             case R.id.button_save_random:
                 Toast.makeText(v.getContext(), "SAVE", Toast.LENGTH_SHORT).show();
