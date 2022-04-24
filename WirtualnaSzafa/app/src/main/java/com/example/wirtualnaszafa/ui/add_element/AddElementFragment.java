@@ -107,7 +107,6 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                System.out.println("nothing selected yet");
             }
         });
 

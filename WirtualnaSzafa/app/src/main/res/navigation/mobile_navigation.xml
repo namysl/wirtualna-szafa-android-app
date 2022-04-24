@@ -16,6 +16,11 @@
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery_scroll" />
     <fragment
+        android:id="@+id/nav_filter_by_gallery"
+        android:name="com.example.wirtualnaszafa.ui.filter_by_gallery.FilterByGalleryFragment"
+        android:label="@string/menu_filter_by"
+        tools:layout="@layout/fragment_filter_by_gallery" />
+    <fragment
         android:id="@+id/nav_add_element"
         android:name="com.example.wirtualnaszafa.ui.add_element.AddElementFragment"
         android:label="@string/menu_add_element"
