@@ -43,30 +43,30 @@
 
     <EditText
         android:id="@+id/editText_tag_photo"
-        android:layout_width="153dp"
+        android:layout_width="160dp"
         android:layout_height="48dp"
         android:fontFamily="sans-serif-smallcaps"
         android:hint="@string/add_tag_placeholder"
         android:inputType="textVisiblePassword"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
         app:layout_constraintEnd_toStartOf="@+id/editText_color_photo"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <Spinner
         android:id="@+id/spinner_tag"
-        android:layout_width="177dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="36dp"
+        android:layout_width="189dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="24dp"
         android:autofillHints="@string/add_tag_placeholder"
         android:contentDescription="@string/add_tag_placeholder"
         app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView_add_photo"
-        app:layout_constraintVertical_bias="1.0" />
-
+        app:layout_constraintVertical_bias="0.944" />
 
     <EditText
         android:id="@+id/editText_color_photo"
@@ -77,12 +77,25 @@
         android:hint="@string/add_color_placeholer"
         android:inputType="textVisiblePassword"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="italic"
         app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.918"
         app:layout_constraintStart_toEndOf="@+id/spinner_tag" />
+
+    <Spinner
+        android:id="@+id/spinner_color"
+        android:layout_width="189dp"
+        android:layout_height="48dp"
+        android:autofillHints="@string/add_tag_placeholder"
+        android:contentDescription="@string/add_tag_placeholder"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.968"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_add_photo"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView_add_photo"

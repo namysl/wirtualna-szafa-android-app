@@ -44,7 +44,7 @@ import java.util.List;
 public class AddElementFragment extends Fragment implements View.OnClickListener{
     Button button_gallery, button_camera, button_save;
     EditText tag_editT, color_editT;
-    Spinner spinner;
+    Spinner spinner_tag, spinner_color;
     private ImageView imageView;
 
     public static final int REQUEST_ID_MULTIPLE_PERMISSIONS = 101;
@@ -66,22 +66,43 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         tag_editT = rootView.findViewById(R.id.editText_tag_photo);
         color_editT = rootView.findViewById(R.id.editText_color_photo);
 
-        spinner = rootView.findViewById(R.id.spinner_tag);
-
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(
+        //tags
+        spinner_tag = rootView.findViewById(R.id.spinner_tag);
+        ArrayAdapter<CharSequence> staticAdapter_tag = ArrayAdapter.createFromResource(
                 rootView.getContext(),
                 R.array.add_tag, //array of strings
                 R.layout.spinner_text); //layout
 
-        staticAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(staticAdapter);
+        staticAdapter_tag.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_tag.setAdapter(staticAdapter_tag);
+        spinner_tag.setSelection(4, true); //it's a very stupid solution, but it works!
 
-        spinner.setSelection(4, true); //it's a very stupid solution, but it works!
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner_tag.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 tag_editT.setText((String) parent.getItemAtPosition(position));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        //colors
+        spinner_color = rootView.findViewById(R.id.spinner_color);
+        ArrayAdapter<CharSequence> staticAdapter_color = ArrayAdapter.createFromResource(
+                rootView.getContext(),
+                R.array.add_color, //array of strings
+                R.layout.spinner_text); //layout
+
+        staticAdapter_color.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_color.setAdapter(staticAdapter_color);
+        spinner_color.setSelection(13, true); //it's a very stupid solution, but it works!
+
+        spinner_color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                color_editT.setText((String) parent.getItemAtPosition(position));
             }
 
             @Override
@@ -151,7 +172,8 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                                     color_editT.setText("");
                                     tag_editT.clearFocus();
                                     color_editT.clearFocus();
-                                    spinner.setSelection(4, true);
+                                    spinner_tag.setSelection(4, true);
+                                    spinner_color.setSelection(13, true);
                                     imageView.setImageResource(R.drawable.ic_hanger);  //back to placeholder state
                                     Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
                                 }

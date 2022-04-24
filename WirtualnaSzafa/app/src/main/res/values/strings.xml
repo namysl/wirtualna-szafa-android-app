@@ -45,6 +45,23 @@
         <item> </item>
     </string-array>
 
+    <string-array name="add_color">
+        <item>beżowy</item>
+        <item>biały</item>
+        <item>brązowy</item>
+        <item>czarny</item>
+        <item>czerwony</item>
+        <item>fioletowy</item>
+        <item>granatowy</item>
+        <item>niebieski</item>
+        <item>pomarańczowy</item>
+        <item>różowy</item>
+        <item>szary</item>
+        <item>zielony</item>
+        <item>żółty</item>
+        <item> </item>
+    </string-array>
+
     <!-- fragment_randomize -->
     <string name="menu_randomize">Losuj zestaw</string>
     <string name="nav_randomize">Wylosowany zestaw</string>
