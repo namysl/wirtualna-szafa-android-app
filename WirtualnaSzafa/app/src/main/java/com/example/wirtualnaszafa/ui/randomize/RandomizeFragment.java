@@ -18,6 +18,7 @@ import com.example.wirtualnaszafa.R;
 import com.example.wirtualnaszafa.db.ClientDB;
 import com.example.wirtualnaszafa.db.all_elements.WardrobeDAO;
 import com.example.wirtualnaszafa.db.all_elements.WardrobeDB;
+import com.example.wirtualnaszafa.db.collections.SavedCollectionsDB;
 import com.google.common.collect.Lists;
 
 import java.io.File;
@@ -132,6 +133,11 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     loadImageFromStorage(cartesian_product.get(rnd).get(2).getPath(), iv_accesories);
                     loadImageFromStorage(cartesian_product.get(rnd).get(3).getPath(), iv_shoes);
 
+                    iv_top.setTag(cartesian_product.get(rnd).get(0).getPath());
+                    iv_bot.setTag(cartesian_product.get(rnd).get(1).getPath());
+                    iv_accesories.setTag(cartesian_product.get(rnd).get(2).getPath());
+                    iv_shoes.setTag(cartesian_product.get(rnd).get(3).getPath());
+
                     displayed.add(rnd);
                     populate_and_shuffle_list(not_displayed, rnd);
                 }
@@ -181,6 +187,12 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     loadImageFromStorage(cartesian_product.get(rnd).get(1).getPath(), iv_bot);
                     loadImageFromStorage(cartesian_product.get(rnd).get(2).getPath(), iv_accesories);
                     loadImageFromStorage(cartesian_product.get(rnd).get(3).getPath(), iv_shoes);
+
+                    iv_top.setTag(cartesian_product.get(rnd).get(0).getPath());
+                    iv_bot.setTag(cartesian_product.get(rnd).get(1).getPath());
+                    iv_accesories.setTag(cartesian_product.get(rnd).get(2).getPath());
+                    iv_shoes.setTag(cartesian_product.get(rnd).get(3).getPath());
+
                     displayed.add(rnd);
                 }
                 else {
@@ -190,6 +202,11 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(2).getPath(), iv_accesories);
                     loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(3).getPath(), iv_shoes);
 
+                    iv_top.setTag(cartesian_product.get(0).get(0).getPath());
+                    iv_bot.setTag(cartesian_product.get(0).get(1).getPath());
+                    iv_accesories.setTag(cartesian_product.get(0).get(2).getPath());
+                    iv_shoes.setTag(cartesian_product.get(0).get(3).getPath());
+
                     displayed.add(not_displayed.get(0));
                     not_displayed.remove(0);
 
@@ -198,8 +215,32 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                 break;
 
             case R.id.button_save_random:
-                Toast.makeText(v.getContext(), "Zestaw został zapisany", Toast.LENGTH_SHORT).show();
-                //TODO button_save_random mega izi
+                class SaveToDB extends AsyncTask<Void, Void, Void> {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        //adding new element
+                        SavedCollectionsDB new_elem = new SavedCollectionsDB();
+                        new_elem.setPath_top(iv_top.getTag().toString());
+                        new_elem.setPath_bot(iv_bot.getTag().toString());
+                        new_elem.setPath_accesories(iv_accesories.getTag().toString());
+                        new_elem.setPath_shoes(iv_shoes.getTag().toString());
+
+                        //push to database
+                        ClientDB.getInstance(getContext())
+                                .getAppDatabase()
+                                .savedCollectionsDAO()
+                                .insert(new_elem);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid){
+                        super.onPostExecute(aVoid);
+                        Toast.makeText(v.getContext(), "Zestaw został zapisany", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                SaveToDB save = new SaveToDB();
+                save.execute();
                 break;
         }
     }

@@ -70,8 +70,10 @@
     <string name="new_random">Losuj ponownie</string>
     <string name="save_random">Zapisz zestaw</string>
 
-    <!-- TODO activity_main_drawer.xml & mobile_navigation.xml COLLECTIONS -->
+    <!-- fragment_collections -->
     <string name="menu_collection">Zapisane zestawy WIP</string>
+    <string name="previous">Poprzedni</string>
+    <string name="next">Następny</string>
 
     <!-- fragment_account -->
     <string name="menu_account">Twoje konto</string>
