@@ -21,8 +21,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <include layout="@layout/content_main" />
-
-    <!-- TODO wywalic kolko albo cos z nim w koncu zrobić -->
+    <!--
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
@@ -32,5 +31,6 @@
         android:layout_marginBottom="16dp"
         app:backgroundTint="@color/lightbrown"
         app:srcCompat="@android:drawable/stat_notify_sync" />
-
+    -->
+    
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

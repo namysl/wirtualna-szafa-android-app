@@ -6,7 +6,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +18,6 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.wirtualnaszafa.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationView;
-import com.google.android.material.snackbar.Snackbar;
 
 public class MainActivity extends AppCompatActivity{
     private AppBarConfiguration mAppBarConfiguration;
@@ -44,14 +42,13 @@ public class MainActivity extends AppCompatActivity{
         setContentView(binding.getRoot());
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Snackbar.make(view, "Work in progress", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                //TODO co to ma właściwie robić...
-            }
-        });
+//        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view){
+//                Snackbar.make(view, "Work in progress", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
