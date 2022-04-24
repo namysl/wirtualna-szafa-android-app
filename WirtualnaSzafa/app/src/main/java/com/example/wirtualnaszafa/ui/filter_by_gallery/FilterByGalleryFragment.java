@@ -76,7 +76,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
 
         staticAdapter_color.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_color.setAdapter(staticAdapter_color);
-        spinner_color.setSelection(13, true); //it's a very stupid solution, but it works!
+        spinner_color.setSelection(14, true); //it's a very stupid solution, but it works!
 
         spinner_color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

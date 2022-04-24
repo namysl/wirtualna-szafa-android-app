@@ -32,35 +32,35 @@ public class SavedCollectionsDB implements Serializable {
         this.id = id;
     }
 
-    public String getPathTop(){
+    public String getPath_top(){
         return path_top;
     }
 
-    public void setPathTop(String path){
+    public void setPath_top(String path){
         this.path_top = path;
     }
 
-    public String getPathBot(){
+    public String getPath_bot(){
         return path_bot;
     }
 
-    public void setPathBot(String path){
+    public void setPath_bot(String path){
         this.path_bot = path;
     }
 
-    public String getPathAccesories(){
+    public String getPath_accesories(){
         return path_accesories;
     }
 
-    public void setPathAccesories(String path){
+    public void setPath_accesories(String path){
         this.path_accesories = path;
     }
 
-    public String getPathShoes(){
+    public String getPath_shoes(){
         return path_shoes;
     }
 
-    public void setPathShoes(String path){
+    public void setPath_shoes(String path){
         this.path_shoes = path;
     }
 }

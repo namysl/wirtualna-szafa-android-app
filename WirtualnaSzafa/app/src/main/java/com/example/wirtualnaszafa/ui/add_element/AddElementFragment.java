@@ -97,7 +97,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
 
         staticAdapter_color.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_color.setAdapter(staticAdapter_color);
-        spinner_color.setSelection(13, true); //it's a very stupid solution, but it works!
+        spinner_color.setSelection(14, true); //it's a very stupid solution, but it works!
 
         spinner_color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -172,7 +172,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                                     tag_editT.clearFocus();
                                     color_editT.clearFocus();
                                     spinner_tag.setSelection(4, true);
-                                    spinner_color.setSelection(13, true);
+                                    spinner_color.setSelection(14, true);
                                     imageView.setImageResource(R.drawable.ic_hanger);  //back to placeholder state
                                     Toast.makeText(v.getContext(), "Zapisano", Toast.LENGTH_SHORT).show();
                                 }
