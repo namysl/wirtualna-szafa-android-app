@@ -26,6 +26,7 @@
 
     <!-- fragment_filter_by_gallery -->
     <string name="menu_filter_by">Filtruj po tagach i kolorach</string>
+    <string name="button_filter">Filtruj i wyświetl</string>
 
     <!-- fragment_add_element -->
     <string name="menu_add_element">Dodaj element</string>

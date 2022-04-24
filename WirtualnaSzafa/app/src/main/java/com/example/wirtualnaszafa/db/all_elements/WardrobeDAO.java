@@ -27,6 +27,14 @@ public interface WardrobeDAO{
     @Query("SELECT * FROM WardrobeDB WHERE color=:color")
     List<WardrobeDB> getClothesByColor(String color);
 
+    //test
+    @Query("SELECT * FROM WardrobeDB WHERE :column=:userinput")
+    List<WardrobeDB> getClothesByUserInput(String column, String userinput);
+
+    //tags and colors
+    @Query("SELECT * FROM WardrobeDB WHERE tag=:tag AND color=:color")
+    List<WardrobeDB> getClothesByTagAndColor(String tag, String color);
+
     @Insert
     void insert(WardrobeDB wardrobeDB);
 

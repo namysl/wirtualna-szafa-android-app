@@ -137,7 +137,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
                     break;
                 case R.id.button_save_photo:
                     //save picked photo to internal memory of the app
-                    if(isEmpty(tag_editT) || isEmpty(color_editT)){  //uwzględniono tagi, TODO kolory
+                    if(isEmpty(tag_editT) || isEmpty(color_editT)){
                         Toast.makeText(v.getContext(), "Pola tag i kolor muszą być wypełnione", Toast.LENGTH_SHORT).show();
                     }
                     else{
