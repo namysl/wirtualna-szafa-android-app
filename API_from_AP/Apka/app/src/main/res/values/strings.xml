@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Wirtualna Szafa</string>
+    <string name="navigation_drawer_open">Otwórz menu</string>
+    <string name="navigation_drawer_close">Zamknij menu</string>
+    <string name="nav_header_title">Wirtualna Szafa</string>
+    <string name="nav_header_subtitle">v0.4</string>
+    <string name="nav_header_desc">Menu</string>
+
+    <string name="dotmenu_lighttheme">Jasny motyw</string>
+    <string name="dotmenu_darktheme">Ciemny motyw</string>
+
+    <!-- placeholder texts in java files -->
+    <string name="hello_blank_fragment">PLACEHOLDER TEXT</string>
+
+    <!-- activity_main_drawer.xml & mobile_navigation.xml TODO-->
+    <string name="menu_remove_element">Usuń element WIP</string>
+    <string name="menu_randomize">Przeglądaj wylosowane WIP</string>
+    <string name="menu_collection">Zapisane zestawy WIP</string>
+
+    <!-- fragment_main & MainActivity -->
+    <string name="menu_home">Strona główna</string>
+
+    <!-- fragment_gallery -->
+    <string name="menu_gallery">Galeria</string>
+
+    <!-- fragment_add_element -->
+    <string name="menu_add_element">Dodaj element</string>
+    <string name="save_photo">Zapisz</string>
+    <string name="cancel_photo">Anuluj</string>
+    <string name="add_from_gallery">Dodaj zdjęcie z galerii</string>
+    <string name="add_from_camera">Zrób zdjęcie</string>
+    <string name="add_tag_placeholder">TAG</string>
+    <string name="add_color_placeholer">KOLOR</string>
+    <string name="add_photoimgview">Dodane zdjęcie</string>
+
+    <!-- fragment_account -->
+    <string name="menu_account">Twoje konto</string>
+    <string name="register_button">Zarejestruj</string>
+    <string name="login">Zaloguj się</string>
+    <string name="account_email">Email</string>
+    <string name="account_password">Hasło</string>
+    <string name="account_username">Nazwa użytkownika</string>
+
+</resources>

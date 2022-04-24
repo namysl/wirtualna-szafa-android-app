@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_hanger"
+            android:title="@string/menu_home" />
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="@string/menu_gallery" />
+        <item
+            android:id="@+id/nav_add_element"
+            android:icon="@drawable/ic_menu_add_element"
+            android:title="@string/menu_add_element" />
+        <item
+            android:id="@+id/nav_remove_element"
+            android:icon="@drawable/ic_menu_remove_element"
+            android:title="@string/menu_remove_element"/>
+    </group>
+    <group
+        android:id="@+id/menu_middle"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_randomize"
+            android:icon="@drawable/ic_menu_randomize"
+            android:title="@string/menu_randomize"/>
+        <item
+            android:id="@+id/nav_collections"
+            android:icon="@drawable/ic_menu_collection"
+            android:title="@string/menu_collection"/>
+    </group>
+    <!-- horizontal separator -->
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="none">
+        <item
+            android:id="@+id/nav_account"
+            android:icon="@drawable/ic_account"
+            android:title="@string/menu_account"/>
+    </group>
+</menu>

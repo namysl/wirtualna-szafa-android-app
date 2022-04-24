@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.add_element.AddElementFragment">
+
+    <Button
+        android:id="@+id/button_add_from_gallery"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/add_from_gallery"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_from_camera"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_add_from_camera"
+        android:layout_width="340dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="96dp"
+        android:text="@string/add_from_camera"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button_save_photo"
+        android:layout_width="128dp"
+        android:layout_height="58dp"
+        android:text="@string/save_photo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button_add_from_camera"
+        app:layout_constraintVertical_bias="0.375" />
+
+    <EditText
+        android:id="@+id/editText_tag_photo"
+        android:layout_width="153dp"
+        android:layout_height="45dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="@string/add_tag_placeholder"
+        android:inputType="textVisiblePassword"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
+        app:layout_constraintEnd_toStartOf="@+id/editText_color_photo"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText_color_photo"
+        android:layout_width="153dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:hint="@string/add_color_placeholer"
+        android:inputType="textVisiblePassword"
+        android:textAlignment="center"
+        android:textSize="22sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toTopOf="@+id/button_add_from_gallery"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView_add_photo"
+        android:layout_width="216dp"
+        android:layout_height="304dp"
+        android:contentDescription="@string/add_photoimgview"
+        android:src="@drawable/ic_hanger"
+        app:layout_constraintBottom_toTopOf="@+id/editText_color_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.891" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.wirtualnaszafa.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/nav_gallery"
+        android:name="com.example.wirtualnaszafa.ui.gallery.GalleryFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_gallery_scroll" />
+    <fragment
+        android:id="@+id/nav_add_element"
+        android:name="com.example.wirtualnaszafa.ui.add_element.AddElementFragment"
+        android:label="@string/menu_add_element"
+        tools:layout="@layout/fragment_add_element" />
+    <fragment
+        android:id="@+id/nav_remove_element"
+        android:name="com.example.wirtualnaszafa.ui.remove_element.RemoveElementFragment"
+        android:label="@string/menu_remove_element"
+        tools:layout="@layout/fragment_remove_element" />
+    <fragment
+        android:id="@+id/nav_randomize"
+        android:name="com.example.wirtualnaszafa.ui.randomize.RandomizeFragment"
+        android:label="@string/menu_randomize"
+        tools:layout="@layout/fragment_randomize" />
+    <fragment
+        android:id="@+id/nav_collections"
+        android:name="com.example.wirtualnaszafa.ui.collections.CollectionsFragment"
+        android:label="@string/menu_collection"
+        tools:layout="@layout/fragment_collections" />
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.example.wirtualnaszafa.ui.account.AccountFragment"
+        android:label="@string/menu_account"
+        tools:layout="@layout/fragment_account" />
+
+</navigation>
