@@ -53,7 +53,6 @@ public class AccountFragment extends Fragment{
                 Toast.makeText(view.getContext(), "Należy wypełnić wszystkie pola", Toast.LENGTH_SHORT).show();
                 return;
             }
-            //można też wymagać, żeby input dla loginu/hasła był nie krótszy niż X
             if (!validate(email_editT.getText().toString())) {
                 //regex validation
                 email_editT.setError("Nieprawidłowy format");

@@ -113,6 +113,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
                         //retrieve data from DB
                         WardrobeDAO dao = ClientDB.getInstance(getContext()).getAppDatabase().wardrobeDAO();
                         found_clothes = dao.getClothesByTag(tag_editT.getText().toString());
+                        current = 0;
 
                         return found_clothes;
                     }
