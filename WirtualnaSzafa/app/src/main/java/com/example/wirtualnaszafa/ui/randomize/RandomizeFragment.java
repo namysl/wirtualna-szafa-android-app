@@ -16,8 +16,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.wirtualnaszafa.R;
 import com.example.wirtualnaszafa.db.ClientDB;
-import com.example.wirtualnaszafa.db.WardrobeDAO;
-import com.example.wirtualnaszafa.db.WardrobeDB;
+import com.example.wirtualnaszafa.db.all_elements.WardrobeDAO;
+import com.example.wirtualnaszafa.db.all_elements.WardrobeDB;
 import com.google.common.collect.Lists;
 
 import java.io.File;
@@ -29,7 +29,6 @@ import java.util.List;
 import java.util.Random;
 
 public class RandomizeFragment extends Fragment implements View.OnClickListener{
-    //TODO RANDOMIZE
     ImageView iv_top, iv_bot, iv_accesories, iv_shoes;
     Button button_new_random, button_save_random;
 
@@ -75,7 +74,6 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                         arrays[i].add(lista_tags.get(j));
                     }
                 }
-
                 return dao.getAll();
             }
 
@@ -89,7 +87,7 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
 
                 if(db.size() == 0){
                     Toast.makeText(rootView.getContext(), "Galeria aplikacji jest pusta," +
-                            "                                   \ndodaj nowe elementy", Toast.LENGTH_LONG).show();
+                                                               "\ndodaj nowe elementy", Toast.LENGTH_LONG).show();
                 }
                 else if(size_top == 0 || size_bot == 0 || size_accesories == 0 || size_shoes == 0) {
                     String empty_tag;
@@ -112,10 +110,10 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     Toast.makeText(rootView.getContext(), empty_tag_to_toast, Toast.LENGTH_LONG).show();
                 }
                 else {
-                    System.out.println("¯\\_(ツ)_/¯  TOP: " + clothes_top.size() +
-                                       " BOT: " + clothes_bot.size() +
-                                       " ACCESORIES: " + clothes_accesories.size() +
-                                       " SHOES: " + clothes_shoes.size() + " ¯\\_(ツ)_/¯");
+//                    System.out.println(" TOP: " + clothes_top.size() +
+//                                       " BOT: " + clothes_bot.size() +
+//                                       " ACCESORIES: " + clothes_accesories.size() +
+//                                       " SHOES: " + clothes_shoes.size());
 
                     //Guava library, cartesian product
                     cartesian_product = Lists.cartesianProduct(clothes_top,
@@ -124,11 +122,10 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                                                                clothes_shoes);
 
                     cartesian_product_size = cartesian_product.size();
-                    System.out.println("SIZE OF CARTESIAN: " + cartesian_product.size());
 
+                    //to always display random collection
                     Random rand = new Random();
                     int rnd = rand.nextInt(cartesian_product_size);
-                    System.out.println("RND: " + rnd);
 
                     loadImageFromStorage(cartesian_product.get(rnd).get(0).getPath(), iv_top);
                     loadImageFromStorage(cartesian_product.get(rnd).get(1).getPath(), iv_bot);
@@ -137,7 +134,6 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
 
                     displayed.add(rnd);
                     populate_and_shuffle_list(not_displayed, rnd);
-                    System.out.println("START: " + displayed + ", " + not_displayed);
                 }
             }
         }
@@ -147,15 +143,12 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
         return rootView;
     }
 
-    private List<Integer> populate_and_shuffle_list(List <Integer> list_to_populate, int picked_random){
+    private void populate_and_shuffle_list(List <Integer> list_to_populate, int picked_random){
         for(int i=0; i<cartesian_product_size; i++){
             list_to_populate.add(i);
         }
-
         list_to_populate.remove(picked_random);
         Collections.shuffle(list_to_populate);
-
-        return list_to_populate;
     }
 
     private void loadImageFromStorage(String path, ImageView img){
@@ -175,15 +168,13 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
         switch (v.getId()) {
             case R.id.button_new_random:
                 if(not_displayed.size() == 0){
+                    //empty, all combinations displayed, start from the beginning
                     Toast.makeText(v.getContext(), "Wyświetlono wszystkie możliwe kombinacje, zestawy pokazywane są od początku", Toast.LENGTH_SHORT).show();
-                    System.out.println("OD NOWAAA");
-                    System.out.println("IF PRZED: " + displayed + ", " + not_displayed);
+
                     Random rand = new Random();
                     int rnd = rand.nextInt(cartesian_product_size);
-                    System.out.println("RND: " + rnd);
 
                     displayed.clear();
-                    not_displayed.clear();
                     populate_and_shuffle_list(not_displayed, rnd);
 
                     loadImageFromStorage(cartesian_product.get(rnd).get(0).getPath(), iv_top);
@@ -191,21 +182,18 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     loadImageFromStorage(cartesian_product.get(rnd).get(2).getPath(), iv_accesories);
                     loadImageFromStorage(cartesian_product.get(rnd).get(3).getPath(), iv_shoes);
                     displayed.add(rnd);
-
-                    System.out.println("IF PO: " + displayed + ", " + not_displayed + "rnd: " + rnd);
                 }
                 else {
+                    //still enough to display
                     loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(0).getPath(), iv_top);
                     loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(1).getPath(), iv_bot);
                     loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(2).getPath(), iv_accesories);
                     loadImageFromStorage(cartesian_product.get(not_displayed.get(0)).get(3).getPath(), iv_shoes);
 
-                    System.out.println("ELSE PRZED " + displayed + ", " + not_displayed);
-
                     displayed.add(not_displayed.get(0));
-                    not_displayed.remove(not_displayed.get(0));
+                    not_displayed.remove(0);
 
-                    System.out.println("ELSE PO " + displayed + ", " + not_displayed);
+                    System.out.println("ELSE PO " + displayed + ",\n" + not_displayed);
                 }
                 break;
 

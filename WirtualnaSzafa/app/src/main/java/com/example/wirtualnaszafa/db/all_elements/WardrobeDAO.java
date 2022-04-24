@@ -1,4 +1,4 @@
-package com.example.wirtualnaszafa.db;
+package com.example.wirtualnaszafa.db.all_elements;
 
 import androidx.room.Dao;
 import androidx.room.Delete;

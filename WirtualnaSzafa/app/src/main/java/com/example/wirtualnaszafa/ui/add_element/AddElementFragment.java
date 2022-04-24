@@ -32,7 +32,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.wirtualnaszafa.R;
 import com.example.wirtualnaszafa.db.ClientDB;
-import com.example.wirtualnaszafa.db.WardrobeDB;
+import com.example.wirtualnaszafa.db.all_elements.WardrobeDB;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -66,7 +66,7 @@ public class AddElementFragment extends Fragment implements View.OnClickListener
         tag_editT = rootView.findViewById(R.id.editText_tag_photo);
         color_editT = rootView.findViewById(R.id.editText_color_photo);
 
-        spinner = (Spinner) rootView.findViewById(R.id.spinner_tag);
+        spinner = rootView.findViewById(R.id.spinner_tag);
 
         ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter.createFromResource(
                 rootView.getContext(),

@@ -16,7 +16,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.wirtualnaszafa.db.ClientDB;
 import com.example.wirtualnaszafa.R;
-import com.example.wirtualnaszafa.db.WardrobeDB;
+import com.example.wirtualnaszafa.db.all_elements.WardrobeDB;
 
 import java.io.File;
 import java.io.FileInputStream;
