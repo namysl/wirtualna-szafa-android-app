@@ -138,6 +138,7 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     iv_accesories.setTag(cartesian_product.get(rnd).get(2).getPath());
                     iv_shoes.setTag(cartesian_product.get(rnd).get(3).getPath());
 
+                    System.out.println("FIRST:" + iv_top.getTag());
                     displayed.add(rnd);
                     populate_and_shuffle_list(not_displayed, rnd);
                 }
@@ -193,6 +194,8 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     iv_accesories.setTag(cartesian_product.get(rnd).get(2).getPath());
                     iv_shoes.setTag(cartesian_product.get(rnd).get(3).getPath());
 
+                    System.out.println("IF:" + iv_top.getTag());
+
                     displayed.add(rnd);
                 }
                 else {
@@ -207,10 +210,10 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                     iv_accesories.setTag(cartesian_product.get(0).get(2).getPath());
                     iv_shoes.setTag(cartesian_product.get(0).get(3).getPath());
 
+                    System.out.println("ELSE:" + iv_top.getTag());
+
                     displayed.add(not_displayed.get(0));
                     not_displayed.remove(0);
-
-                    System.out.println("ELSE PO " + displayed + ",\n" + not_displayed);
                 }
                 break;
 

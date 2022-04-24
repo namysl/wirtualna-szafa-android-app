@@ -91,7 +91,7 @@
         app:srcCompat="@drawable/ic_hanger" />
 
     <Button
-        android:id="@+id/button_left"
+        android:id="@+id/button_previous"
         android:layout_width="50dp"
         android:layout_height="55dp"
         android:drawableLeft="@drawable/ic_left"
@@ -102,7 +102,7 @@
         tools:ignore="SpeakableTextPresentCheck" />
 
     <Button
-        android:id="@+id/button_right"
+        android:id="@+id/button_next"
         android:layout_width="50dp"
         android:layout_height="55dp"
         android:layout_marginStart="12dp"

@@ -71,9 +71,11 @@
     <string name="save_random">Zapisz zestaw</string>
 
     <!-- fragment_collections -->
-    <string name="menu_collection">Zapisane zestawy WIP</string>
+    <string name="menu_collection">Zapisane zestawy</string>
+    <string name="collections_empty">Nie zapisano jeszcze żadnego zestawu</string>
     <string name="previous">Poprzedni</string>
     <string name="next">Następny</string>
+    <string name="delete_collection">Usuń</string>
 
     <!-- fragment_account -->
     <string name="menu_account">Twoje konto</string>

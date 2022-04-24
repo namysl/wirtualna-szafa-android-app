@@ -91,8 +91,8 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
 
         iV_fromDB = rootView.findViewById(R.id.imageView_fromDB);
 
-        button_left = rootView.findViewById(R.id.button_left);
-        button_right = rootView.findViewById(R.id.button_right);
+        button_left = rootView.findViewById(R.id.button_previous);
+        button_right = rootView.findViewById(R.id.button_next);
         button_filter = rootView.findViewById(R.id.button_filter);
         button_filter.setOnClickListener(this);
 

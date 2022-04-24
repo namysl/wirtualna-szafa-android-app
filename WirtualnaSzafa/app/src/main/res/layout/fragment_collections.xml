@@ -45,28 +45,34 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView_bot" />
 
     <Button
-        android:id="@+id/button_right"
-        android:layout_width="170dp"
+        android:id="@+id/button_next"
+        android:layout_width="60dp"
         android:layout_height="50dp"
         android:drawableRight="@drawable/ic_right"
-        android:text="@string/next"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.659"
-        app:layout_constraintStart_toEndOf="@+id/button_left"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.839" />
+        app:layout_constraintHorizontal_bias="0.909"
+        app:layout_constraintStart_toEndOf="@+id/button_previous"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_shoes" />
 
     <Button
-        android:id="@+id/button_left"
-        android:layout_width="170dp"
+        android:id="@+id/button_previous"
+        android:layout_width="60dp"
         android:layout_height="50dp"
         android:layout_marginStart="16dp"
         android:drawableLeft="@drawable/ic_left"
-        android:text="@string/previous"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.839" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView_accessory" />
+
+    <Button
+        android:id="@+id/button_delete_collection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/delete_collection"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/button_next"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toEndOf="@+id/button_previous"
+        app:layout_constraintTop_toBottomOf="@+id/imageView_shoes"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
