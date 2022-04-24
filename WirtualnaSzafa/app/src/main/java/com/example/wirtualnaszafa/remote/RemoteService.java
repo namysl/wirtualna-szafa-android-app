@@ -42,7 +42,7 @@ public class RemoteService {
         HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
         httpLoggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         builder.networkInterceptors().add(httpLoggingInterceptor);
-//            builder.networkInterceptors().add(interceptor)
+        //builder.networkInterceptors().add(interceptor)
         OkHttpClient okHttpClient = builder.build();
 
         Gson gson = new GsonBuilder()

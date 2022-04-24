@@ -71,12 +71,12 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
         spinner_color = rootView.findViewById(R.id.spinner_color);
         ArrayAdapter<CharSequence> staticAdapter_color = ArrayAdapter.createFromResource(
                 rootView.getContext(),
-                R.array.add_color, //array of strings
-                R.layout.spinner_text); //layout
+                R.array.add_color,
+                R.layout.spinner_text);
 
         staticAdapter_color.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_color.setAdapter(staticAdapter_color);
-        spinner_color.setSelection(14, true); //it's a very stupid solution, but it works!
+        spinner_color.setSelection(14, true);
 
         spinner_color.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -165,7 +165,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
                         //retrieve data from DB
                         WardrobeDAO dao = ClientDB.getInstance(getContext()).getAppDatabase().wardrobeDAO();
                         found_clothes = dao.getClothesByTagAndColor(tag_editT.getText().toString(),
-                                color_editT.getText().toString());
+                                                                    color_editT.getText().toString());
 
                         return found_clothes;
                     }
@@ -200,7 +200,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
         });
 
         button_right.setOnClickListener(new View.OnClickListener() {
-            //move to left
+            //move to right
             public void onClick(View v) {
                 if(current == found_clothes.size()-1){
                     Toast.makeText(getContext(), "To ostatni znaleziony element", Toast.LENGTH_SHORT).show();

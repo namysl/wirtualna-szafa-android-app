@@ -73,7 +73,6 @@ public class GalleryFragment extends Fragment {
                         tv_tag.setText(tag);
                         String color = getResources().getString(R.string.color, obj.getColor());
                         tv_color.setText(color);
-                        //TODO query+filtrowanie
 
                         Button button_del = view.findViewById(R.id.button_delete);
 
