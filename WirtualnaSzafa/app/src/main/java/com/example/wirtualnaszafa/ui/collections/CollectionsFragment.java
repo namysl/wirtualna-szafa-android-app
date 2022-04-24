@@ -53,7 +53,7 @@ import java.util.List;
                                           .savedCollectionsDAO();
 
                 saved_items = dao.getAllDesc();
-
+                System.out.println("NEW_ELEM2: " + saved_items);
                 return saved_items;
             }
 
@@ -104,22 +104,33 @@ import java.util.List;
 
                     button_delete.setOnClickListener(new View.OnClickListener() {
                         //delete entry from DB
-                        //change text on the button and display placeholder
                         public void onClick(View v) {
-                            if(saved_items.size() > 0) {
-                                System.out.println("Saved: " + saved_items);
+                            if(saved_items.size() > 1) {
                                 deleteEntryInDB(saved_items.get(current));
                                 saved_items.remove(current);
-                                System.out.println("Deleted: " + saved_items);
 
+                                current = 0; //need to return to first item, because this was a bad idea
+                                loadImageFromStorage(saved_items.get(current).getPath_top(), iv_top);
+                                loadImageFromStorage(saved_items.get(current).getPath_bot(), iv_bot);
+                                loadImageFromStorage(saved_items.get(current).getPath_accesories(), iv_accesories);
+                                loadImageFromStorage(saved_items.get(current).getPath_shoes(), iv_shoes);
+                            }
+                            else if(saved_items.size() == 1){
                                 iv_top.setImageResource(R.drawable.ic_hanger);
                                 iv_bot.setImageResource(R.drawable.ic_hanger);
                                 iv_accesories.setImageResource(R.drawable.ic_hanger);
                                 iv_shoes.setImageResource(R.drawable.ic_hanger);
 
+                                deleteEntryInDB(saved_items.get(current));
+                                saved_items.remove(current);
                                 button_delete.setText(R.string.deleted_from_db);
                                 current = 0;
                             }
+                            else{
+                                current = 0;
+                                System.out.println("list is empty");
+                            }
+
                         }
                     });
                 }

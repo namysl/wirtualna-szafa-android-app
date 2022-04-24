@@ -61,7 +61,7 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
         button_save_random = rootView.findViewById(R.id.button_save_random);
 
         button_new_random.setOnClickListener(this);
-        button_save_random.setOnClickListener(this);
+        //button_save_random.setOnClickListener(this);
 
         class LoadFromDB extends AsyncTask<Void, Void, List<WardrobeDB>> {
             @Override
@@ -147,6 +147,38 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
         LoadFromDB load = new LoadFromDB();
         load.execute();
 
+        button_save_random.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                class SaveToDB extends AsyncTask<Void, Void, Void> {
+                    @Override
+                    protected Void doInBackground(Void... voids) {
+                        //adding new element
+                        SavedCollectionsDB new_elem = new SavedCollectionsDB();
+                        new_elem.setPath_top(iv_top.getTag().toString());
+                        new_elem.setPath_bot(iv_bot.getTag().toString());
+                        new_elem.setPath_accesories(iv_accesories.getTag().toString());
+                        new_elem.setPath_shoes(iv_shoes.getTag().toString());
+
+                        System.out.println("NEW_ELEM1: " + new_elem);
+                        //push to database
+                        ClientDB.getInstance(getContext())
+                                .getAppDatabase()
+                                .savedCollectionsDAO()
+                                .insert(new_elem);
+                        return null;
+                    }
+
+                    @Override
+                    protected void onPostExecute(Void aVoid) {
+                        super.onPostExecute(aVoid);
+                        Toast.makeText(rootView.getContext(), "Zestaw został zapisany", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                SaveToDB save = new SaveToDB();
+                save.execute();
+            }
+        });
+
         return rootView;
     }
 
@@ -217,34 +249,35 @@ public class RandomizeFragment extends Fragment implements View.OnClickListener{
                 }
                 break;
 
-            case R.id.button_save_random:
-                class SaveToDB extends AsyncTask<Void, Void, Void> {
-                    @Override
-                    protected Void doInBackground(Void... voids) {
-                        //adding new element
-                        SavedCollectionsDB new_elem = new SavedCollectionsDB();
-                        new_elem.setPath_top(iv_top.getTag().toString());
-                        new_elem.setPath_bot(iv_bot.getTag().toString());
-                        new_elem.setPath_accesories(iv_accesories.getTag().toString());
-                        new_elem.setPath_shoes(iv_shoes.getTag().toString());
-
-                        //push to database
-                        ClientDB.getInstance(getContext())
-                                .getAppDatabase()
-                                .savedCollectionsDAO()
-                                .insert(new_elem);
-                        return null;
-                    }
-
-                    @Override
-                    protected void onPostExecute(Void aVoid){
-                        super.onPostExecute(aVoid);
-                        Toast.makeText(v.getContext(), "Zestaw został zapisany", Toast.LENGTH_SHORT).show();
-                    }
-                }
-                SaveToDB save = new SaveToDB();
-                save.execute();
-                break;
+//            case R.id.button_save_random:
+//                class SaveToDB extends AsyncTask<Void, Void, Void> {
+//                    @Override
+//                    protected Void doInBackground(Void... voids) {
+//                        //adding new element
+//                        SavedCollectionsDB new_elem = new SavedCollectionsDB();
+//                        new_elem.setPath_top(iv_top.getTag().toString());
+//                        new_elem.setPath_bot(iv_bot.getTag().toString());
+//                        new_elem.setPath_accesories(iv_accesories.getTag().toString());
+//                        new_elem.setPath_shoes(iv_shoes.getTag().toString());
+//
+//                        System.out.println("NEW_ELEM1: " + new_elem);
+//                        //push to database
+//                        ClientDB.getInstance(getContext())
+//                                .getAppDatabase()
+//                                .savedCollectionsDAO()
+//                                .insert(new_elem);
+//                        return null;
+//                    }
+//
+//                    @Override
+//                    protected void onPostExecute(Void aVoid){
+//                        super.onPostExecute(aVoid);
+//                        Toast.makeText(v.getContext(), "Zestaw został zapisany", Toast.LENGTH_SHORT).show();
+//                    }
+//                }
+//                SaveToDB save = new SaveToDB();
+//                save.execute();
+//                break;
         }
     }
 }

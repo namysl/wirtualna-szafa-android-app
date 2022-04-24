@@ -1,5 +1,9 @@
 package com.example.wirtualnaszafa.ui.home;
 
+import static com.example.wirtualnaszafa.Constants.ACCOUNT_PREFERENCES_KEY;
+import static com.example.wirtualnaszafa.Constants.TOKEN_KEY;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,6 +29,15 @@ public class HomeFragment extends Fragment {
 
         final TextView textView = binding.textHome;
         homeViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+
+        homeViewModel.getTest().observe(getViewLifecycleOwner(), result -> {
+            if(result == null) return;
+            System.out.println(result);
+        });
+
+        String token = requireContext().getSharedPreferences(ACCOUNT_PREFERENCES_KEY, Context.MODE_PRIVATE).getString(TOKEN_KEY, null);
+        homeViewModel.test(token);
+
         return root;
     }
 
