@@ -35,6 +35,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
     Spinner spinner_tag, spinner_color;
     ImageView iV_fromDB;
     List<WardrobeDB> found_clothes = new ArrayList<>();
+    int current = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -90,6 +91,8 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
 
         iV_fromDB = rootView.findViewById(R.id.imageView_fromDB);
 
+        button_left = rootView.findViewById(R.id.button_left);
+        button_right = rootView.findViewById(R.id.button_right);
         button_filter = rootView.findViewById(R.id.button_filter);
         button_filter.setOnClickListener(this);
 
@@ -121,7 +124,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
                         if (db.size() == 0) {
                             Toast.makeText(getContext(), "Brak wyników", Toast.LENGTH_SHORT).show();
                         } else {
-                            loadImageFromInternalStorage(found_clothes.get(0).getPath(), iV_fromDB);
+                            loadImageFromInternalStorage(found_clothes.get(current).getPath(), iV_fromDB);
                         }
                     }
                 }
@@ -147,7 +150,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
                         if (db.size() == 0) {
                             Toast.makeText(getContext(), "Brak wyników", Toast.LENGTH_SHORT).show();
                         } else {
-                            loadImageFromInternalStorage(found_clothes.get(0).getPath(), iV_fromDB);
+                            loadImageFromInternalStorage(found_clothes.get(current).getPath(), iV_fromDB);
                         }
                     }
                 }
@@ -173,7 +176,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
                         if (db.size() == 0) {
                             Toast.makeText(getContext(), "Brak wyników", Toast.LENGTH_SHORT).show();
                         } else {
-                            loadImageFromInternalStorage(found_clothes.get(0).getPath(), iV_fromDB);
+                            loadImageFromInternalStorage(found_clothes.get(current).getPath(), iV_fromDB);
                         }
                     }
                 }
@@ -181,6 +184,32 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
                 load.execute();
             }
         }
+
+        button_left.setOnClickListener(new View.OnClickListener() {
+            //move to left
+            public void onClick(View v) {
+                if(current == 0){
+                    Toast.makeText(getContext(), "To pierwszy znaleziony element", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    current -= 1;
+                    loadImageFromInternalStorage(found_clothes.get(current).getPath(), iV_fromDB);
+                }
+            }
+        });
+
+        button_right.setOnClickListener(new View.OnClickListener() {
+            //move to left
+            public void onClick(View v) {
+                if(current == found_clothes.size()-1){
+                    Toast.makeText(getContext(), "To ostatni znaleziony element", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    current += 1;
+                    loadImageFromInternalStorage(found_clothes.get(current).getPath(), iV_fromDB);
+                }
+            }
+        });
     }
 
     boolean isEmpty(EditText text) {
