@@ -102,6 +102,7 @@ public class FilterByGalleryFragment extends Fragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.button_filter) {
+            current = 0;
             if (isEmpty(tag_editT) && isEmpty(color_editT)) {
                 Toast.makeText(v.getContext(), "Należy wybrać przynajmniej jeden filtr", Toast.LENGTH_SHORT).show();
             } else if (!isEmpty(tag_editT) && isEmpty(color_editT)) {
