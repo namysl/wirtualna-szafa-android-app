@@ -10,6 +10,8 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_hanger"
             android:title="@string/menu_home" />
+    </group>
+    <group>
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
@@ -36,12 +38,4 @@
             android:title="@string/menu_collection"/>
     </group>
     <!-- horizontal separator -->
-    <group
-        android:id="@+id/menu_bottom"
-        android:checkableBehavior="none">
-        <item
-            android:id="@+id/nav_account"
-            android:icon="@drawable/ic_account"
-            android:title="@string/menu_account"/>
-    </group>
 </menu>
